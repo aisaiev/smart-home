@@ -64,6 +64,18 @@ services:
     ports:
       - 27017:27017
 
+  # ESPHome
+  esphome:
+    container_name: esphome
+    image: ghcr.io/esphome/esphome
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./esphome:/config:rw
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: host
+
   # Transmission
   transmission:
     container_name: transmission
