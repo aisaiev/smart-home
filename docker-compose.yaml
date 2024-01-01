@@ -1,0 +1,113 @@
+version: '3.6'
+services:
+  # Portainer CE
+  portainer-ce:
+    container_name: portainer
+    image: portainer/portainer-ce
+    restart: unless-stopped
+    ports:
+      - 8000:8000 # Agent
+      - 9000:9000 # Web UI
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - .docker/portainer-ce/data:/data
+
+  # Nginx Proxy Manager
+  nginx-proxy-manager:
+    container_name: nginx-proxy-manager
+    image: jc21/nginx-proxy-manager:latest
+    restart: unless-stopped
+    ports:
+      - 80:80 # Public HTTP Port
+      - 443:443 # Public HTTPS Port
+      - 81:81 # Admin Web Port
+    volumes:
+      - .docker/nginx-proxy-manager/data:/data
+      - .docker/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+
+  # Home Assistant
+  home-assistant:
+    container_name: home-assistant
+    image: ghcr.io/home-assistant/home-assistant:latest
+    volumes:
+      - ./home-assistant:/config
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - .env
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+
+  # MQTT
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:latest
+    restart: unless-stopped
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - .docker/mosquitto/data:/mosquitto/data
+      - .docker/mosquitto/log:/mosquitto/log
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  # MongoDB
+  mongodb:
+    container_name: mongodb
+    build:
+      context: ./mongo
+    restart: unless-stopped
+    environment:
+      MONGO_REPLICA_HOST: 127.0.0.1
+      MONGO_REPLICA_PORT: 27017
+      MONGO_COMMAND: 'mongo'
+    ports:
+      - 27017:27017
+
+  # Transmission
+  transmission:
+    container_name: transmission
+    image: lscr.io/linuxserver/transmission:latest
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    volumes:
+      - .docker/transmission/config:/config
+      - ./media/downloads:/downloads
+
+  # Cloudflare Tunnel
+  solar-weather-station-cloudflared:
+    container_name: solar-weather-station-tunnel
+    image: cloudflare/cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    env_file:
+      - .env
+    environment:
+      - TUNNEL_TOKEN=${SOLAR_WEATHER_STATION_CLOUDFLARE_TUNNEL_TOKEN}
+
+  # Cloudflare Tunnel
+  maxar-map-cloudflared:
+    container_name: maxar-map-tunnel
+    image: cloudflare/cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    env_file:
+      - .env
+    environment:
+      - TUNNEL_TOKEN=${MAXAR_MAP_CLOUDFLARE_TUNNEL_TOKEN}
+
+  # Cloudflare Tunnel
+  find-your-wine-cloudflared:
+    container_name: find-your-wine-tunnel
+    image: cloudflare/cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    env_file:
+      - .env
+    environment:
+      - TUNNEL_TOKEN=${FIND_YOUR_WINE_CLOUDFLARE_TUNNEL_TOKEN}

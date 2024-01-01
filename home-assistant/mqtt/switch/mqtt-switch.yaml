@@ -1,0 +1,7 @@
+---
+  - name: "Flower Humidifier"
+    unique_id: "flower_humidifier"
+    state_topic: "flower-humidifier/state"
+    command_topic: "flower-humidifier/power"
+    payload_on: "1"
+    payload_off: "0"

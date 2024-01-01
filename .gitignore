@@ -1,0 +1,20 @@
+# Generic ignores
+.env
+.DS_Store
+*.log*
+*.db
+*.db-shm
+*.db-wal
+
+# Ignore folders
+.docker
+.storage
+.cloud
+deps
+media
+mongo
+
+# Home Assistant
+/home-assistant/secrets.yaml
+/home-assistant/custom_components
+/home-assistant/www/community
