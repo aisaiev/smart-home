@@ -32,6 +32,7 @@ services:
     volumes:
       - ./home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
     env_file:
       - .env
     restart: unless-stopped
@@ -50,6 +51,18 @@ services:
       - .docker/mosquitto/data:/mosquitto/data
       - .docker/mosquitto/log:/mosquitto/log
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  # Matter
+  matter-server:
+    container_name: matter-server
+    image: ghcr.io/home-assistant-libs/python-matter-server:stable
+    restart: unless-stopped
+    network_mode: host
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - .docker/matter-server/data:/data/
+      - /run/dbus:/run/dbus:ro
 
   # MongoDB
   mongodb:
