@@ -9,3 +9,17 @@
   - service: backup.create
     data: {}
   mode: single
+- id: '1704200208287'
+  alias: Sunset light
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: -01:00:00
+  condition: []
+  action:
+  - type: turn_on
+    device_id: f4242b9122aad3a276e0e134b9f2a77d
+    entity_id: cf7bcbd7414e37970a11ade0f3633d67
+    domain: light
+  mode: single
