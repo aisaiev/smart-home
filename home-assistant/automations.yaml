@@ -1,1 +1,11 @@
-[]
+- id: '1704194273528'
+  alias: Create backup
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:00:00
+  condition: []
+  action:
+  - service: backup.create
+    data: {}
+  mode: single
