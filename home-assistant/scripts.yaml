@@ -1,1 +1,51 @@
-{}
+vacuum_clean_living_room:
+  alias: Vacuum Clean Living Room
+  icon: mdi:sofa
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.kuzia
+    data:
+      command: spot_area
+      params:
+        rooms: 3
+        cleanings: 1
+
+vacuum_clean_kitchen:
+  alias: Vacuum Clean Kitchen
+  icon: mdi:countertop
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.kuzia
+    data:
+      command: spot_area
+      params:
+        rooms: 1
+        cleanings: 1
+
+vacuum_clean_corridor:
+  alias: Vacuum Clean Corridor
+  icon: mdi:door
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.kuzia
+    data:
+      command: spot_area
+      params:
+        rooms: 5,6,0
+        cleanings: 1
+
+vacuum_clean_bathroom:
+  alias: Vacuum Clean Bathroom
+  icon: mdi:bathtub
+  sequence:
+  - service: vacuum.send_command
+    target:
+      entity_id: vacuum.kuzia
+    data:
+      command: spot_area
+      params:
+        rooms: 7
+        cleanings: 1
