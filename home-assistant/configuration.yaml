@@ -13,7 +13,7 @@ scene: !include scenes.yaml
 http:
   use_x_forwarded_for: true
   trusted_proxies:
-    - 172.18.0.9
+    - 172.18.0.0/24
 
 recorder:
   purge_keep_days: 90
