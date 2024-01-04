@@ -6,8 +6,8 @@ services:
     image: portainer/portainer-ce
     restart: unless-stopped
     ports:
-      - 8000:8000 # Agent
-      - 9000:9000 # Web UI
+      - 8000:8000
+      - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - .docker/portainer-ce/data:/data
@@ -18,9 +18,9 @@ services:
     image: jc21/nginx-proxy-manager:latest
     restart: unless-stopped
     ports:
-      - 80:80 # Public HTTP Port
-      - 443:443 # Public HTTPS Port
-      - 81:81 # Admin Web Port
+      - 80:80
+      - 443:443
+      - 81:81
     volumes:
       - .docker/nginx-proxy-manager/data:/data
       - .docker/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
@@ -29,13 +29,13 @@ services:
   home-assistant:
     container_name: home-assistant
     image: ghcr.io/home-assistant/home-assistant:latest
+    restart: unless-stopped
     volumes:
       - ./home-assistant:/config
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
     env_file:
       - .env
-    restart: unless-stopped
     privileged: true
     network_mode: host
 
@@ -43,6 +43,7 @@ services:
   duplicati:
     container_name: duplicati
     image: lscr.io/linuxserver/duplicati:latest
+    restart: unless-stopped
     env_file:
       - .env
     volumes:
@@ -51,7 +52,6 @@ services:
       - .:/source
     ports:
       - 8200:8200
-    restart: unless-stopped
 
   # MQTT
   mosquitto:
@@ -77,6 +77,48 @@ services:
     volumes:
       - .docker/matter-server/data:/data/
       - /run/dbus:/run/dbus:ro
+
+  # Eufy
+  eufy-security-ws:
+    container_name: eufy-security-ws
+    image: bropat/eufy-security-ws
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - 3003:3000
+    environment:
+      - USERNAME=${EUFY_USER}
+      - PASSWORD=${EUFY_PASSWORD}
+      - COUNTRY=${EUFY_COUNTRY}
+    volumes:
+      - .docker/eufy-security-ws/data:/data:rw
+
+  # Scrypted
+  scrypted:
+    container_name: scrypted
+    image: ghcr.io/koush/scrypted
+    restart: unless-stopped
+    network_mode: host
+    env_file:
+      - .env
+    environment:
+      - SCRYPTED_WEBHOOK_UPDATE_AUTHORIZATION=${SCRYPTED_WEBHOOK_UPDATE_AUTHORIZATION}
+      - SCRYPTED_WEBHOOK_UPDATE=${SCRYPTED_WEBHOOK_UPDATE_URL}
+    volumes:
+      - ./scrypted/volume:/server/volume
+
+  # Go2RTC
+  go2rtc:
+    container_name: go2rtc
+    image: alexxit/go2rtc
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+    env_file:
+      - .env
+    volumes:
+      - ./go2rtc:/config
 
   # MongoDB
   mongodb:

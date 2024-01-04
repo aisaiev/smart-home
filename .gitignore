@@ -13,6 +13,7 @@
 deps
 media
 mongo
+scrypted
 backups
 
 # Home Assistant
