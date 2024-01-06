@@ -1,0 +1,62 @@
+esphome:
+  name: pico-flower-led
+  friendly_name: Pico Flower Led
+
+rp2040:
+  board: rpipicow
+  framework:
+    # Required until https://github.com/platformio/platform-raspberrypi/pull/36 is merged
+    platform_version: https://github.com/maxgerhardt/platform-raspberrypi.git
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "FEBMc+e+uFWzOmD14kaLoQBYj80jhfoUQqGUOeBCR90="
+
+ota:
+  password: "95e4a55324898bef9c49cd656615d2fe"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot in case wifi connection fails
+  ap:
+    ssid: "Pico-Flower-Led Fallback Hotspot"
+    password: "WSRfiPa4fZ1C"
+    
+light:
+  - platform: monochromatic
+    name: "Light"
+    id: pico_flower_led
+    output: combined_led
+
+binary_sensor:
+  - platform: gpio
+    pin: 2
+    id: led_switch
+    name: "Switch"
+    on_press:
+      then:
+        - light.toggle: pico_flower_led
+
+output:
+  - platform: template
+    id: combined_led
+    type: float
+    write_action:
+      - output.set_level:
+          id: blue_led
+          level: !lambda return state;
+      - output.set_level:
+          id: red_led
+          level: !lambda return state;
+  - platform: rp2040_pwm
+    pin: 0
+    id: blue_led
+  - platform: rp2040_pwm
+    pin: 1
+    id: red_led
