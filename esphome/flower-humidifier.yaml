@@ -32,24 +32,38 @@ switch:
     id: humidifier_switch
     name: "Switch"
     restore_mode: "DISABLED"
+    lambda: |-
+      if (id(humidifier_switch).state) {
+        return true;
+      } else {
+        return false;
+      }
     turn_on_action:
-      - output.turn_on: humidifier_button
-      - delay: 200ms
-      - output.turn_off: humidifier_button
-      - switch.template.publish:
-          id: humidifier_switch
-          state: ON
+      - while:
+          condition:
+            lambda: 'return !id(humidifier_switch).state;'
+          then:
+            - output.turn_on: humidifier_button
+            - delay: 100ms
+            - output.turn_off: humidifier_button
+            - switch.template.publish:
+                id: humidifier_switch
+                state: ON
     turn_off_action:
-      - output.turn_on: humidifier_button
-      - delay: 200ms
-      - output.turn_off: humidifier_button
-      - delay: 500ms
-      - output.turn_on: humidifier_button
-      - delay: 200ms
-      - output.turn_off: humidifier_button
-      - switch.template.publish:
-          id: humidifier_switch
-          state: OFF
+      - while:
+          condition:
+            lambda: 'return id(humidifier_switch).state;'
+          then:
+            - output.turn_on: humidifier_button
+            - delay: 100ms
+            - output.turn_off: humidifier_button
+            - delay: 500ms
+            - output.turn_on: humidifier_button
+            - delay: 100ms
+            - output.turn_off: humidifier_button
+            - switch.template.publish:
+                id: humidifier_switch
+                state: OFF
 
 output:
   - platform: gpio
