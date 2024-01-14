@@ -1,0 +1,58 @@
+homeassistant: true
+frontend: true
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://localhost
+serial:
+  port: /dev/ttyACM0
+advanced:
+  network_key:
+    - 73
+    - 234
+    - 71
+    - 48
+    - 185
+    - 199
+    - 58
+    - 1
+    - 114
+    - 249
+    - 107
+    - 144
+    - 23
+    - 114
+    - 240
+    - 212
+  pan_id: 61318
+  ext_pan_id:
+    - 193
+    - 19
+    - 24
+    - 65
+    - 215
+    - 130
+    - 195
+    - 225
+  homeassistant_legacy_entity_attributes: false
+  legacy_api: false
+  legacy_availability_payload: false
+  log_syslog:
+    app_name: Zigbee2MQTT
+    eol: /n
+    host: localhost
+    localhost: localhost
+    path: /dev/log
+    pid: process.pid
+    port: 514
+    protocol: udp4
+    type: '5424'
+  transmit_power: 20
+  last_seen: ISO_8601_local
+device_options:
+  legacy: false
+devices:
+  '0xa4c13833f4c3b795':
+    friendly_name: Tuya T&H - Corridor
+  '0xa4c13893629d91f8':
+    friendly_name: Tuya Plug - Corridor
+availability: true
