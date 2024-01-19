@@ -12,6 +12,7 @@
 .cloud
 deps
 media
+plex
 mongo
 scrypted
 backups
