@@ -55,4 +55,6 @@ devices:
     friendly_name: Tuya T&H - Corridor
   '0xa4c13893629d91f8':
     friendly_name: Tuya Plug - Corridor
+  '0xbc026efffe591122':
+    friendly_name: IKEA VINDSTYRKA
 availability: true
