@@ -193,6 +193,23 @@ services:
       - ./media/downloads:/downloads
     restart: unless-stopped
 
+  # Pi-hole
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - '${LOCAL_IP_ADDRESS}:53:53/tcp'
+      - '${LOCAL_IP_ADDRESS}:53:53/udp'
+      - '5300:80/tcp'
+    env_file:
+      - .env
+    environment:
+      WEBPASSWORD: ${PIHOLE_WEBPASSWORD}
+    volumes:
+      - .docker/pihole/etc-pihole:/etc/pihole
+      - .docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+    restart: unless-stopped
+
   # Cloudflare Tunnel
   solar-weather-station-cloudflared:
     container_name: solar-weather-station-tunnel
