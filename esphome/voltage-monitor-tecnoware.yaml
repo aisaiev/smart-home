@@ -1,6 +1,6 @@
 esphome:
-  name: voltage-monitor-dc1018
-  friendly_name: Voltage Monitor DC1018
+  name: voltage-monitor-tecnoware
+  friendly_name: Voltage Monitor Tecnoware
 
 esp8266:
   board: esp01_1m
@@ -11,10 +11,10 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "04ZLAxpCjcUOnGBt6WqV54vd1Ok22Vpq86CmEXCXLoo="
+    key: "l6/gomYB+TCh9E4zrb+PiDAxRPNzZOFqo7+F33Uribs="
 
 ota:
-  password: "7fbeeddc3d4c37aa0833f7d187569e37"
+  password: "ad99bee408bbfa9fc16059d3c06ebfd9"
 
 wifi:
   ssid: !secret wifi_ssid
@@ -22,8 +22,8 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Voltage-Monitor-DC1018"
-    password: "fXvGFPAabO2U"
+    ssid: "Voltage-Monitor-Tecnoware"
+    password: "Du0USuB9ZNVo"
 
 captive_portal:
 
@@ -56,7 +56,7 @@ sensor:
     lambda: |-
       float voltage = id(battery_voltage).state;
       float min_voltage = 6.4;
-      float max_voltage = 8.4;
+      float max_voltage = 8.34;
       if (voltage <= min_voltage) {
         return 0.0;
       } else if (voltage >= max_voltage) {
