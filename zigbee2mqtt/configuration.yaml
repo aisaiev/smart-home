@@ -52,9 +52,11 @@ device_options:
   legacy: false
 devices:
   '0xa4c13833f4c3b795':
-    friendly_name: Tuya T&H - Corridor
+    friendly_name: Tuya T&H - Server
   '0xa4c13893629d91f8':
     friendly_name: Tuya Plug - Corridor
   '0xbc026efffe591122':
     friendly_name: IKEA VINDSTYRKA
+  '0xa4c138cdcba8d262':
+    friendly_name: Tuya T&H - Balcony
 availability: true
