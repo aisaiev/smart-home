@@ -67,7 +67,11 @@ sensor:
     update_interval: never
 
 interval:
-  - interval: 60s
+  - interval: 300s
     then:
       - component.update: sensor_ina219
       - component.update: battery_level
+
+switch:
+  - platform: restart
+    name: "Restart"
