@@ -1,0 +1,46 @@
+esphome:
+  name: usb-power-monitor
+  friendly_name: USB Power Monitor
+
+esp8266:
+  board: d1_mini
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "A8/HtJFtAzbaaWeMHrwNlExE5/QWLOm/7EyfqONnLFI="
+
+ota:
+  password: "321d207853044c6841219189c7e9201b"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "USB-Power-Monitor"
+    password: "YCANF0JArs1z"
+
+captive_portal:
+
+web_server:
+  port: 80
+
+i2c:
+
+sensor:
+  - platform: ina226
+    address: 0x40
+    shunt_resistance: 0.002 ohm
+    bus_voltage:
+      name: "Voltage"
+    current:
+      name: "Current"
+    power:
+      name: "Power"
+    max_current: 20.0A
+    update_interval: 5s
