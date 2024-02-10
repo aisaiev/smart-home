@@ -8,12 +8,11 @@ vacuum_clean_living_room:
     data:
       command: spot_area
       params:
-        rooms: 3
+        rooms: 4
         cleanings: 1
-
 vacuum_clean_kitchen:
   alias: Vacuum Clean Kitchen
-  icon: mdi:countertop
+  icon: mdi:fridge
   sequence:
   - service: vacuum.send_command
     target:
@@ -23,7 +22,7 @@ vacuum_clean_kitchen:
       params:
         rooms: 1
         cleanings: 1
-
+  mode: single
 vacuum_clean_corridor:
   alias: Vacuum Clean Corridor
   icon: mdi:door
@@ -34,12 +33,11 @@ vacuum_clean_corridor:
     data:
       command: spot_area
       params:
-        rooms: 5,6,0
+        rooms: 0
         cleanings: 1
-
 vacuum_clean_bathroom:
   alias: Vacuum Clean Bathroom
-  icon: mdi:bathtub
+  icon: mdi:shower
   sequence:
   - service: vacuum.send_command
     target:
@@ -49,3 +47,4 @@ vacuum_clean_bathroom:
       params:
         rooms: 7
         cleanings: 1
+  mode: single
