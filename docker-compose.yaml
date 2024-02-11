@@ -224,6 +224,7 @@ services:
       - 5900:5900
     volumes:
       - .docker/firefox:/config:rw
+    restart: unless-stopped
 
   # Cloudflare Tunnel
   solar-weather-station-cloudflared:
