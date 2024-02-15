@@ -59,4 +59,12 @@ devices:
     friendly_name: IKEA VINDSTYRKA
   '0xa4c138cdcba8d262':
     friendly_name: Tuya T&H - Balcony
+  '0xa4c138ca5548cd96':
+    friendly_name: Tuya T&H - Living Room
+  '0xa4c138f8559edb38':
+    friendly_name: Tuya T&H - Corridor
+  '0xa4c138ddbb0cfbb8':
+    friendly_name: Tuya T&H - Kitchen
+  '0xa4c13819a9c4556b':
+    friendly_name: Tuya T&H - Bathroom
 availability: true
