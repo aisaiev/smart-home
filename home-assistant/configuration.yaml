@@ -30,3 +30,14 @@ sensor:
       - 'date'
       - 'date_time'
       - 'date_time_iso'
+
+emulated_hue:
+  listen_port: 8300
+  expose_by_default: false
+  entities:
+    switch.flower_humidifier_switch:
+      name: "Flower Humidifier"
+      hidden: false
+    light.pico_flower_led_light:
+      name: "Flower Led"
+      hidden: false
