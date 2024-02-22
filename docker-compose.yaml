@@ -210,22 +210,6 @@ services:
       - .docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
     restart: unless-stopped
 
-  # Firefox
-  firefox:
-    container_name: firefox
-    image: jlesage/firefox
-    env_file:
-      - .env
-    environment:
-      - DISPLAY_WIDTH=${FIREFOX_DISPLAY_WIDTH}
-      - DISPLAY_HEIGHT=${FIREFOX_DISPLAY_HEIGHT}
-    ports:
-      - 5800:5800
-      - 5900:5900
-    volumes:
-      - .docker/firefox:/config:rw
-    restart: unless-stopped
-
   # Cloudflare Tunnel
   solar-weather-station-cloudflared:
     container_name: solar-weather-station-tunnel
