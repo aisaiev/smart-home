@@ -23,3 +23,21 @@
     entity_id: cf7bcbd7414e37970a11ade0f3633d67
     domain: light
   mode: single
+- id: '1708018415133'
+  alias: Anastasiia's Desktop Led Button Single click
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 5399133a85c2f813f7bbad14d394f432
+    type: action
+    subtype: single
+    discovery_id: 0xa4c1385a105448b2 action_single
+  condition: []
+  action:
+  - service: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.anastasiia_s_desktop_led
+  mode: single

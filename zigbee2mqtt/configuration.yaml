@@ -67,4 +67,8 @@ devices:
     friendly_name: Tuya T&H - Kitchen
   '0xa4c13819a9c4556b':
     friendly_name: Tuya T&H - Bathroom
+  '0xa4c1381790b2492b':
+    friendly_name: Anastasiia's Desktop Led
+  '0xa4c1385a105448b2':
+    friendly_name: Anastasiia's Desktop Led Button
 availability: true
