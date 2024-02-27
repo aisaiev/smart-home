@@ -176,22 +176,7 @@ services:
     volumes:
       - .docker/transmission/config:/config
       - ./media/downloads:/downloads
-
-  # Plex
-  plex:
-    container_name: plex
-    image: lscr.io/linuxserver/plex:latest
-    network_mode: host
-    env_file:
-      - .env
-    environment:
-      VERSION: docker
-    volumes:
-      - .docker/plex/config:/config
-      - ./plex:/config/Library
-      - /media/anton/UGREEN-1/media:/data/media1
-      - ./media/downloads:/downloads
-    restart: unless-stopped
+      - /media/anton/EMMC/downloads:/downloads2
 
   # Pi-hole
   pihole:
