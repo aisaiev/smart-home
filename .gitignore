@@ -16,6 +16,7 @@ plex
 mongo
 scrypted
 backups
+homarr
 
 # Home Assistant
 /home-assistant/secrets.yaml

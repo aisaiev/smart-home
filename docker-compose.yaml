@@ -65,7 +65,7 @@ services:
       - .docker/mosquitto/data:/mosquitto/data
       - .docker/mosquitto/log:/mosquitto/log
       - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-  
+
   # Zigbee2MQTT
   zigbee2mqtt:
     container_name: zigbee2mqtt
@@ -193,6 +193,32 @@ services:
     volumes:
       - .docker/pihole/etc-pihole:/etc/pihole
       - .docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+    restart: unless-stopped
+
+  # Homarr
+  homarr:
+    container_name: homarr
+    image: ghcr.io/ajnart/homarr:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./homarr/configs:/app/data/configs
+      - ./homarr/icons:/app/public/icons
+      - ./homarr/data:/data
+    ports:
+      - 7575:7575
+    restart: unless-stopped
+
+  # Dashdot
+  dashdot:
+    container_name: dashdot
+    image: mauricenino/dashdot:latest
+    privileged: true
+    env_file:
+      - .env
+    volumes:
+      - /:/mnt/host:ro
+    ports:
+      - 3004:3001
     restart: unless-stopped
 
   # Cloudflare Tunnel
