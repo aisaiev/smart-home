@@ -208,20 +208,7 @@ services:
       - 7575:7575
     restart: unless-stopped
 
-  # Dashdot
-  dashdot:
-    container_name: dashdot
-    image: mauricenino/dashdot:latest
-    privileged: true
-    env_file:
-      - .env
-    volumes:
-      - /:/mnt/host:ro
-    ports:
-      - 3004:3001
-    restart: unless-stopped
-
-    # Firefox
+  # Firefox
   firefox:
     container_name: firefox
     image: jlesage/firefox
