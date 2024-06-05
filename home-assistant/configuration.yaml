@@ -9,6 +9,10 @@ frontend:
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+template: !include template.yaml
+sensor: !include sensors.yaml
+ics_calendar: !include ics_calendar.yaml
+emulated_hue: !include emulated_hue.yaml
 
 http:
   use_x_forwarded_for: true
@@ -22,22 +26,3 @@ mqtt:
   - light: !include_dir_merge_list mqtt/light
   - switch: !include_dir_merge_list mqtt/switch
   - sensor: !include_dir_merge_list mqtt/sensor
-
-sensor:
-  - platform: time_date
-    display_options:
-      - 'time'
-      - 'date'
-      - 'date_time'
-      - 'date_time_iso'
-
-emulated_hue:
-  listen_port: 8300
-  expose_by_default: false
-  entities:
-    switch.flower_humidifier_switch:
-      name: "Flower Humidifier"
-      hidden: false
-    light.pico_flower_led_light:
-      name: "Flower Led"
-      hidden: false

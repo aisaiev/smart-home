@@ -1,0 +1,19 @@
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+    - 'date_time'
+    - 'date_time_iso'
+- platform: history_stats
+  name: "Hours without electricity"
+  entity_id: binary_sensor.electricity_presence
+  state: 'off'
+  duration:
+    hours: 24
+  end: '{{ now() }}'
+- platform: template
+  sensors:
+    percentage_without_electricity:
+      friendly_name: "Percentage without electricity"
+      unit_of_measurement: '%'
+      value_template: "{{ ((states('sensor.hours_without_electricity') | float / 24) * 100) | round(2) }}"
