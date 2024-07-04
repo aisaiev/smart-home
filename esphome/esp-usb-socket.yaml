@@ -14,6 +14,7 @@ api:
     key: "SUTTUIei3Lweu1R6fqPkA64M1qcp2AfhkRauN3OG7a8="
 
 ota:
+  platform: esphome
   password: "f09754fe817074f511cf07bcebad630e"
 
 wifi:
@@ -46,7 +47,7 @@ sensor:
       name: "Voltage"
     max_voltage: 32.0V
     max_current: 3.2A
-    update_interval: 5s
+    update_interval: 30s
 
 switch:
   - platform: gpio
