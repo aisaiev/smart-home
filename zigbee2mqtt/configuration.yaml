@@ -69,8 +69,10 @@ devices:
     friendly_name: Tuya T&H - Bathroom
   '0xa4c1381790b2492b':
     friendly_name: Anastasiia's Desktop Led
-  '0xa4c1385a105448b2':
-    friendly_name: Anastasiia's Desktop Led Button
   '0xa4c138d45bad7547':
     friendly_name: Tuya Socket - Bambu Lab A1 Mini
+  '0xa4c138d371771a16':
+    friendly_name: Anton's Desktop Led
+  '0xa4c138ee392442c2':
+    friendly_name: Anton's Desktop Led Button
 availability: true

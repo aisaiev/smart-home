@@ -23,21 +23,61 @@
     entity_id: cf7bcbd7414e37970a11ade0f3633d67
     domain: light
   mode: single
-- id: '1708018415133'
-  alias: Anastasiia's Desktop Led Button Single click
+- id: '1717655923777'
+  alias: Electricity not detected
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.tuya_plug_corridor_voltage
+    from:
+    to: unavailable
+  condition: []
+  action:
+  - type: turn_off
+    device_id: eb6e5b4a4664fda5366635a02f6a179f
+    entity_id: fa44e5ac4a0df6c54e27397459eb45ee
+    domain: switch
+  - type: turn_off
+    device_id: 6f6c3bb4ac13e717282c2cd389e78f63
+    entity_id: 30dbb1917d02f5bc506b7ca102d5ff70
+    domain: switch
+    enabled: true
+  mode: single
+- id: '1717656035531'
+  alias: Electricity detected
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.tuya_plug_corridor_voltage
+    from: unavailable
+    to:
+  condition: []
+  action:
+  - type: turn_on
+    device_id: eb6e5b4a4664fda5366635a02f6a179f
+    entity_id: fa44e5ac4a0df6c54e27397459eb45ee
+    domain: switch
+  - type: turn_on
+    device_id: 6f6c3bb4ac13e717282c2cd389e78f63
+    entity_id: 30dbb1917d02f5bc506b7ca102d5ff70
+    domain: switch
+    enabled: true
+  mode: single
+- id: '1719304706918'
+  alias: Anton's Desktop Led Button Single click
   description: ''
   trigger:
   - platform: device
     domain: mqtt
-    device_id: 5399133a85c2f813f7bbad14d394f432
+    device_id: c97304da42e5614a8f03c760bfd7e3bc
     type: action
     subtype: single
-    discovery_id: 0xa4c1385a105448b2 action_single
   condition: []
   action:
-  - service: light.toggle
-    metadata: {}
-    data: {}
-    target:
-      entity_id: light.anastasiia_s_desktop_led
+  - type: toggle
+    device_id: ec88a148fbe20ff6e69eb7c013f96172
+    entity_id: 9ccec3dd1cc9a1322a4649ca7b57f53d
+    domain: light
   mode: single
