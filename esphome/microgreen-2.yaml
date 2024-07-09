@@ -36,6 +36,7 @@ i2c:
 light:
   - platform: monochromatic
     name: "Led"
+    id: microgreen_led
     output: led
 
 output:
@@ -46,13 +47,28 @@ output:
 switch:
   - platform: gpio
     pin: 13
+    id: microgreen_fan
     name: "Fan"
+
+binary_sensor:
+  - platform: gpio
+    pin: 14
+    name: "Switch"
+    on_click:
+      - min_length: 50ms
+        max_length: 350ms
+        then:
+          - light.toggle: microgreen_led
+      - min_length: 500ms
+        max_length: 2000ms
+        then:
+          - switch.toggle: microgreen_fan
 
 sensor:
   - platform: aht10
     variant: AHT20
     temperature:
-      name: " Temperature"
+      name: "Temperature"
     humidity:
       name: "Humidity"
     update_interval: 60s

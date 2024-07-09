@@ -7,3 +7,18 @@ entities:
   light.pico_flower_led_light:
     name: "Flower Led"
     hidden: false
+  light.microgreen_1_led:
+    name: "Microgreen Led 1"
+    hidden: false
+  light.microgreen_2_led:
+    name: "Microgreen Led 2"
+    hidden: false
+  switch.microgreen_1_fan:
+    name: "Microgreen Fan 1"
+    hidden: false
+  switch.microgreen_2_fan:
+    name: "Microgreen Fan 2"
+    hidden: false
+  switch.eve_energy_20ebo8301:
+    name: "Boiler"
+    hidden: false
