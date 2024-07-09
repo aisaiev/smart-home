@@ -81,3 +81,19 @@
     entity_id: 9ccec3dd1cc9a1322a4649ca7b57f53d
     domain: light
   mode: single
+- id: '1720421849927'
+  alias: Internet speed test
+  description: ''
+  trigger:
+  - platform: time_pattern
+    hours: /2
+  condition: []
+  action:
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id:
+      - sensor.speedtest_download
+      - automation.internet_speed_test
+      - sensor.speedtest_ping
+  mode: single
