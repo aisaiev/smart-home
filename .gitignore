@@ -17,6 +17,7 @@ mongo
 scrypted
 backups
 homarr
+frigate
 
 # Home Assistant
 /home-assistant/secrets.yaml

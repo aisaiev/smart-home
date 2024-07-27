@@ -1,4 +1,3 @@
-version: '3.6'
 services:
   # Portainer CE
   portainer-ce:
@@ -207,6 +206,7 @@ services:
       - .env
     environment:
       WEBPASSWORD: ${PIHOLE_WEBPASSWORD}
+      FTLCONF_BLOCK_ICLOUD_PR: false
     volumes:
       - .docker/pihole/etc-pihole:/etc/pihole
       - .docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
@@ -275,3 +275,23 @@ services:
       - .env
     environment:
       - TUNNEL_TOKEN=${FIND_YOUR_WINE_CLOUDFLARE_TUNNEL_TOKEN}
+
+  # Frigate
+  # frigate:
+  #   container_name: frigate
+  #   image: ghcr.io/blakeblackshear/frigate:stable-rk
+  #   restart: unless-stopped
+  #   privileged: true
+  #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
+  #     - ./frigate/config:/config
+  #     - /media/anton/EMMC/frigate:/media/frigate
+  #     - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
+  #       target: /tmp/cache
+  #       tmpfs:
+  #         size: 1000000000
+  #   ports:
+  #     - 5000:5000
+  #     - 8553:8554 # RTSP feeds
+  #     - 8556:8555/tcp # WebRTC over tcp
+  #     - 8556:8555/udp # WebRTC over udp
