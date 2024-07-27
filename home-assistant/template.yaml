@@ -5,9 +5,3 @@
       {{ states("sensor.tuya_plug_corridor_voltage") != "unavailable" }}
     device_class: power
     icon: mdi:power-plug-outline
-  - name: "Electricity schedule"
-    unique_id: electricity_schedule
-    state: >
-      {{ states("calendar.electricity_schedule") != "on" }}
-    device_class: plug
-    icon: mdi:home-clock-outline

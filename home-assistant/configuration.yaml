@@ -11,7 +11,6 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 template: !include template.yaml
 sensor: !include sensors.yaml
-ics_calendar: !include ics_calendar.yaml
 emulated_hue: !include emulated_hue.yaml
 
 http:

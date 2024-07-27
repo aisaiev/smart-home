@@ -1,4 +1,0 @@
-calendars:
-    - name: "Electricity schedule"
-      url: "https://shutdown-calendar.fly.dev/calendar/1.ics"
-      download_interval: 240
