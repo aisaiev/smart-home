@@ -39,10 +39,9 @@
     entity_id: fa44e5ac4a0df6c54e27397459eb45ee
     domain: switch
   - type: turn_off
-    device_id: 6f6c3bb4ac13e717282c2cd389e78f63
-    entity_id: 30dbb1917d02f5bc506b7ca102d5ff70
+    device_id: cde3cbfdda2198258f8fa8a479cd3358
+    entity_id: f8c3eb16e1e78bc7b12b1619d8838365
     domain: switch
-    enabled: true
   mode: single
 - id: '1717656035531'
   alias: Electricity detected
@@ -59,11 +58,10 @@
     device_id: eb6e5b4a4664fda5366635a02f6a179f
     entity_id: fa44e5ac4a0df6c54e27397459eb45ee
     domain: switch
-  - type: turn_on
-    device_id: 6f6c3bb4ac13e717282c2cd389e78f63
-    entity_id: 30dbb1917d02f5bc506b7ca102d5ff70
+  - type: turn_off
+    device_id: cde3cbfdda2198258f8fa8a479cd3358
+    entity_id: f8c3eb16e1e78bc7b12b1619d8838365
     domain: switch
-    enabled: true
   mode: single
 - id: '1719304706918'
   alias: Anton's Desktop Led Button Single click
@@ -96,4 +94,97 @@
       - sensor.speedtest_download
       - automation.internet_speed_test
       - sensor.speedtest_ping
+  mode: single
+- id: '1723288853366'
+  alias: Microgreen display
+  description: ''
+  trigger:
+  - platform: time_pattern
+    hours: /1
+    minutes: 0
+  condition: []
+  action:
+  - service: open_epaper_link.drawcustom
+    target:
+      entity_id:
+      - open_epaper_link.00000284a2053b1a
+    data:
+      background: white
+      rotate: 0
+      payload:
+      - type: line
+        x_start: 148
+        y_start: 0
+        x_end: 148
+        y_end: 128
+        width: 1
+        fill: black
+      - type: text
+        value: Редиска
+        font: rbm.ttf
+        x: 30
+        y: 5
+        color: red
+      - type: icon
+        value: thermometer
+        x: 0
+        y: 40
+        size: 20
+        color: black
+      - type: text
+        value: '{{states(''sensor.microgreen_2_temperature'')}} °C'
+        font: rbm.ttf
+        x: 20
+        y: 43
+      - type: icon
+        value: water-percent
+        x: 0
+        y: 70
+        size: 20
+        color: black
+      - type: text
+        value: '{{states(''sensor.microgreen_2_humidity'')}} %'
+        font: rbm.ttf
+        x: 20
+        y: 73
+      - type: text
+        value: 'Посаджено: 07.08'
+        font: rbm.ttf
+        size: 15
+        x: 5
+        y: 113
+      - type: text
+        value: Цибулька
+        font: rbm.ttf
+        x: 175
+        y: 5
+        color: red
+      - type: icon
+        value: thermometer
+        x: 150
+        y: 40
+        size: 20
+        color: black
+      - type: text
+        value: '{{states(''sensor.microgreen_1_temperature'')}} °C'
+        font: rbm.ttf
+        x: 170
+        y: 43
+      - type: icon
+        value: water-percent
+        x: 150
+        y: 70
+        size: 20
+        color: black
+      - type: text
+        value: '{{states(''sensor.microgreen_1_humidity'')}} %'
+        font: rbm.ttf
+        x: 170
+        y: 73
+      - type: text
+        value: 'Посаджено: 22.07'
+        font: rbm.ttf
+        size: 15
+        x: 155
+        y: 113
   mode: single
