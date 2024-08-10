@@ -175,8 +175,8 @@ services:
     volumes:
       - .docker/transmission/config:/config
       - ./media/downloads:/downloads
-      - /media/anton/EMMC/downloads:/downloads2
-    
+      - /media/anton/EMMC/downloads:/emmc
+
   # Plex
   plex:
     container_name: plex
@@ -206,7 +206,7 @@ services:
       - .env
     environment:
       WEBPASSWORD: ${PIHOLE_WEBPASSWORD}
-      FTLCONF_BLOCK_ICLOUD_PR: false
+      FTLCONF_BLOCK_ICLOUD_PR: 'false'
     volumes:
       - .docker/pihole/etc-pihole:/etc/pihole
       - .docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
