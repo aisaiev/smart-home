@@ -57,7 +57,7 @@ sensor:
     lambda: |-
       float voltage = id(battery_voltage).state;
       float min_voltage = 6.4;
-      float max_voltage = 8.34;
+      float max_voltage = 8.4;
       if (voltage <= min_voltage) {
         return 0.0;
       } else if (voltage >= max_voltage) {

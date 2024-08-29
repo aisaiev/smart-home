@@ -48,3 +48,118 @@ vacuum_clean_bathroom:
         rooms: 7
         cleanings: 1
   mode: single
+microgreen_display:
+  alias: Microgreen display
+  sequence:
+  - service: open_epaper_link.drawcustom
+    target:
+      entity_id:
+      - open_epaper_link.00000284a2053b1a
+    data:
+      background: white
+      rotate: 0
+      payload:
+      - type: line
+        x_start: 148
+        y_start: 0
+        x_end: 148
+        y_end: 128
+        width: 1
+        fill: black
+      - type: text
+        value: Горошок
+        font: rbm.ttf
+        x: 30
+        y: 5
+        color: red
+      - type: icon
+        value: '{% if is_state(''light.microgreen_2_led'', ''on'') %} lightbulb {%
+          else %} lightbulb-off {% endif %}'
+        x: 0
+        y: 32
+        size: 20
+        color: black
+      - type: icon
+        value: '{% if is_state(''switch.microgreen_2_fan'', ''on'') %} fan {% else
+          %} fan-off {% endif %}'
+        x: 25
+        y: 30
+        size: 20
+        color: black
+      - type: icon
+        value: thermometer
+        x: 0
+        y: 57
+        size: 20
+        color: black
+      - type: text
+        value: '{{states(''sensor.microgreen_2_temperature'')}} °C'
+        font: rbm.ttf
+        x: 20
+        y: 60
+      - type: icon
+        value: water-percent
+        x: 0
+        y: 82
+        size: 20
+        color: black
+      - type: text
+        value: '{{states(''sensor.microgreen_2_humidity'')}} %'
+        font: rbm.ttf
+        x: 20
+        y: 85
+      - type: text
+        value: 'Посаджено: 18.08'
+        font: rbm.ttf
+        size: 15
+        x: 5
+        y: 113
+      - type: text
+        value: Огірок-трава
+        font: rbm.ttf
+        x: 165
+        y: 5
+        color: red
+      - type: icon
+        value: '{% if is_state(''light.microgreen_1_led'', ''on'') %} lightbulb {%
+          else %} lightbulb-off {% endif %}'
+        x: 150
+        y: 32
+        size: 20
+        color: black
+      - type: icon
+        value: '{% if is_state(''switch.microgreen_1_fan'', ''on'') %} fan {% else
+          %} fan-off {% endif %}'
+        x: 175
+        y: 30
+        size: 20
+        color: black
+      - type: icon
+        value: thermometer
+        x: 150
+        y: 57
+        size: 20
+        color: black
+      - type: text
+        value: '{{states(''sensor.microgreen_1_temperature'')}} °C'
+        font: rbm.ttf
+        x: 170
+        y: 60
+      - type: icon
+        value: water-percent
+        x: 150
+        y: 82
+        size: 20
+        color: black
+      - type: text
+        value: '{{states(''sensor.microgreen_1_humidity'')}} %'
+        font: rbm.ttf
+        x: 170
+        y: 85
+      - type: text
+        value: 'Посаджено: 18.08'
+        font: rbm.ttf
+        size: 15
+        x: 155
+        y: 113
+  description: ''

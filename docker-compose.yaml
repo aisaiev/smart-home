@@ -242,6 +242,8 @@ services:
     volumes:
       - .docker/firefox:/config:rw
     restart: unless-stopped
+    depends_on:
+      - home-assistant
 
   # Cloudflare Tunnel
   solar-weather-station-cloudflared:
