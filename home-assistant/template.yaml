@@ -2,6 +2,6 @@
   - name: "Electricity presence"
     unique_id: electricity_presence
     state: >
-      {{ states("sensor.tuya_plug_corridor_voltage") != "unavailable" }}
+      {{ states("sensor.electricity_detector_relay_voltage") != "unavailable" }}
     device_class: power
     icon: mdi:power-plug-outline

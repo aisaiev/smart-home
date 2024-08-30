@@ -75,4 +75,6 @@ devices:
     friendly_name: Anton's Desktop Led
   '0xa4c138ee392442c2':
     friendly_name: Anton's Desktop Led Button
+  '0xa4c1381c7534571b':
+    friendly_name: Electricity detector relay
 availability: true

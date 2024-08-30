@@ -29,7 +29,7 @@
   trigger:
   - platform: state
     entity_id:
-    - sensor.tuya_plug_corridor_voltage
+    - sensor.electricity_detector_relay_voltage
     from:
     to: unavailable
   condition: []
@@ -42,6 +42,10 @@
     device_id: cde3cbfdda2198258f8fa8a479cd3358
     entity_id: f8c3eb16e1e78bc7b12b1619d8838365
     domain: switch
+  - service: notify.notify
+    metadata: {}
+    data:
+      message: "Electricity not detected \U0001F50C"
   mode: single
 - id: '1717656035531'
   alias: Electricity detected
@@ -49,7 +53,7 @@
   trigger:
   - platform: state
     entity_id:
-    - sensor.tuya_plug_corridor_voltage
+    - sensor.electricity_detector_relay_voltage
     from: unavailable
     to:
   condition: []
@@ -62,6 +66,10 @@
     device_id: cde3cbfdda2198258f8fa8a479cd3358
     entity_id: f8c3eb16e1e78bc7b12b1619d8838365
     domain: switch
+  - service: notify.notify
+    metadata: {}
+    data:
+      message: Electricity detected ⚡
   mode: single
 - id: '1719304706918'
   alias: Anton's Desktop Led Button Single click
@@ -251,17 +259,19 @@
       - type: text
         value: '{{ as_timestamp(states(''sensor.date_time_iso'')) | timestamp_custom(''%d.%m.%Y'')
           }}'
-        x: 225
+        x: 291
         y: 10
         size: 12
         font: rbm.ttf
+        anchor: rt
       - type: text
         value: 'Last updated: {{ as_timestamp(states(''sensor.date_time_iso'')) |
-          timestamp_custom(''%H:%M:%S'') }}'
-        x: 185
+          timestamp_custom(''%H:%M'') }}'
+        x: 291
         y: 118
         size: 10
         font: rbm.ttf
+        anchor: rt
   mode: single
 - id: '1723999952515'
   alias: Microgreen state changed
@@ -292,4 +302,134 @@
   - service: script.microgreen_display
     metadata: {}
     data: {}
+  mode: single
+- id: '1724934618093'
+  alias: Ecoflow Delta Pro display
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: /15
+  - platform: state
+    entity_id:
+    - sensor.bolek_status
+    from: assume_offline
+    to: assume_online
+  - platform: device
+    type: changed_states
+    device_id: 7b97b4ab00c199201c4d4878de2283db
+    entity_id: 4148925d69e8f76be84970a9e9c263fb
+    domain: switch
+  condition:
+  - condition: state
+    entity_id: sensor.bolek_status
+    state: assume_online
+  action:
+  - service: open_epaper_link.drawcustom
+    target:
+      entity_id:
+      - open_epaper_link.0284a3393b140284
+    data:
+      background: white
+      rotate: 0
+      payload:
+      - type: text
+        value: Bolek
+        x: 5
+        y: 5
+      - type: text
+        value: '{{ as_timestamp(states(''sensor.date_time_iso'')) | timestamp_custom(''%d-%m-%Y,
+          %H:%M'') }}'
+        x: 291
+        y: 10
+        size: 10
+        anchor: rt
+      - type: line
+        x_start: 5
+        x_end: 291
+        y_start: 25
+        y_end: 25
+        width: 1
+        fill: red
+      - type: progress_bar
+        x_start: 5
+        y_start: 98
+        x_end: 291
+        y_end: 123
+        fill: red
+        outline: black
+        width: 1
+        progress: '{{states(''sensor.bolek_battery_level'')}}'
+        direction: right
+      - type: text
+        value: '{{states(''sensor.bolek_battery_level'')}} %'
+        x: 148
+        y: 82
+        size: 15
+        anchor: mt
+      - type: text
+        value: "{% if states('sensor.bolek_total_in_power') | int > 0 %}\n  {{states('sensor.bolek_charge_remaining_time')
+          | int // 60}}h {{states('sensor.bolek_charge_remaining_time') | int % 60}}m\n{%
+          else %}\n  {{states('sensor.bolek_discharge_remaining_time') | int // 60}}h
+          {{states('sensor.bolek_discharge_remaining_time') | int % 60}}m\n{% endif
+          %}"
+        x: 5
+        y: 50
+        size: 25
+      - type: text
+        value: 'In: {{states(''sensor.bolek_total_in_power'')}} W'
+        x: 291
+        y: 40
+        anchor: rt
+        size: 17
+      - type: text
+        value: 'Out: {{states(''sensor.bolek_total_out_power'')}} W'
+        x: 291
+        y: 70
+        anchor: rt
+        size: 17
+  mode: single
+- id: '1724943986455'
+  alias: Ecoflow Delta Pro turned off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.bolek_status
+    from: assume_online
+    to: assume_offline
+  condition: []
+  action:
+  - service: open_epaper_link.drawcustom
+    target:
+      entity_id:
+      - open_epaper_link.0284a3393b140284
+    data:
+      background: white
+      rotate: 0
+      payload:
+      - type: text
+        value: Bolek
+        x: 5
+        y: 5
+      - type: text
+        value: '{{ as_timestamp(states(''sensor.date_time_iso'')) | timestamp_custom(''%d-%m-%Y,
+          %H:%M'') }}'
+        x: 291
+        y: 10
+        size: 10
+        anchor: rt
+      - type: line
+        x_start: 5
+        x_end: 291
+        y_start: 25
+        y_end: 25
+        width: 1
+        fill: red
+      - type: icon
+        value: power-plug-off
+        x: 148
+        y: 74
+        size: 70
+        color: black
+        anchor: mm
   mode: single
