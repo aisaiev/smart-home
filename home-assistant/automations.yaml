@@ -308,17 +308,22 @@
   description: ''
   trigger:
   - platform: time_pattern
-    minutes: /15
+    minutes: /10
   - platform: state
     entity_id:
     - sensor.bolek_status
     from: assume_offline
     to: assume_online
-  - platform: device
-    type: changed_states
-    device_id: 7b97b4ab00c199201c4d4878de2283db
-    entity_id: 4148925d69e8f76be84970a9e9c263fb
-    domain: switch
+  - platform: state
+    entity_id:
+    - switch.bolek_ac_enabled
+    from: 'on'
+    to: 'off'
+  - platform: state
+    entity_id:
+    - switch.bolek_ac_enabled
+    from: 'off'
+    to: 'on'
   condition:
   - condition: state
     entity_id: sensor.bolek_status
