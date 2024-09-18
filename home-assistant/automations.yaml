@@ -42,10 +42,11 @@
     device_id: cde3cbfdda2198258f8fa8a479cd3358
     entity_id: f8c3eb16e1e78bc7b12b1619d8838365
     domain: switch
-  - service: notify.notify
-    metadata: {}
+    enabled: false
+  - metadata: {}
     data:
       message: "Electricity not detected \U0001F50C"
+    action: notify.notify
   mode: single
 - id: '1717656035531'
   alias: Electricity detected
@@ -66,10 +67,11 @@
     device_id: cde3cbfdda2198258f8fa8a479cd3358
     entity_id: f8c3eb16e1e78bc7b12b1619d8838365
     domain: switch
-  - service: notify.notify
-    metadata: {}
+    enabled: false
+  - metadata: {}
     data:
       message: Electricity detected ⚡
+    action: notify.notify
   mode: single
 - id: '1719304706918'
   alias: Anton's Desktop Led Button Single click
@@ -179,98 +181,95 @@
         value: Kyiv
         x: 5
         y: 5
-        font: rbm.ttf
-        size: 23
+      - type: text
+        value: '{{ as_timestamp(states(''sensor.date_time_iso'')) | timestamp_custom(''%d.%m.%Y'')
+          }}'
+        x: 291
+        y: 10
+        size: 10
+        anchor: rt
+      - type: line
+        x_start: 5
+        x_end: 291
+        y_start: 27
+        y_end: 27
+        width: 1
+        fill: red
       - type: icon
         value: thermometer
         x: 0
-        y: 30
+        y: 32
         size: 20
         color: red
       - type: text
         value: '{{states(''sensor.esp32_weather_station_temperature'') | round(1)}}
           °C'
         x: 25
-        y: 33
-        size: 17
-        font: rbm.ttf
+        y: 37
+        size: 15
       - type: icon
         value: water-percent
         x: 0
-        y: 60
+        y: 62
         size: 20
         color: red
       - type: text
         value: '{{states(''sensor.esp32_weather_station_humidity'') | round(1)}} %'
         x: 25
-        y: 63
-        size: 17
-        font: rbm.ttf
+        y: 67
+        size: 15
       - type: icon
         value: gauge
         x: 0
-        y: 90
+        y: 92
         size: 20
         color: red
       - type: text
         value: '{{states(''sensor.esp32_weather_station_pressure'') | round(1)}} hPa'
         x: 25
-        y: 93
-        size: 17
-        font: rbm.ttf
+        y: 97
+        size: 15
       - type: icon
         value: air-filter
         x: 200
-        y: 30
+        y: 32
         size: 20
         color: red
       - type: text
         value: '{{states(''sensor.lun_misto_air_301_air_quality_index'')}}'
         x: 225
-        y: 33
-        size: 17
-        font: rbm.ttf
+        y: 37
+        size: 15
       - type: icon
         value: sine-wave
         x: 200
-        y: 60
+        y: 62
         size: 20
         color: red
       - type: text
         value: '{{states(''sensor.esp32_weather_station_battery_voltage'') | round(2)}}
           V'
         x: 225
-        y: 63
-        size: 17
-        font: rbm.ttf
+        y: 67
+        size: 15
       - type: icon
         value: battery
         x: 200
-        y: 90
+        y: 92
         size: 20
         color: red
       - type: text
         value: '{{states(''sensor.esp32_weather_station_battery_level'') | round(1)}}
           %'
         x: 225
-        y: 95
-        size: 17
-        font: rbm.ttf
-      - type: text
-        value: '{{ as_timestamp(states(''sensor.date_time_iso'')) | timestamp_custom(''%d.%m.%Y'')
-          }}'
-        x: 291
-        y: 10
-        size: 12
-        font: rbm.ttf
-        anchor: rt
+        y: 97
+        size: 15
       - type: text
         value: 'Last updated: {{ as_timestamp(states(''sensor.date_time_iso'')) |
           timestamp_custom(''%H:%M'') }}'
         x: 291
         y: 118
         size: 10
-        font: rbm.ttf
         anchor: rt
   mode: single
 - id: '1723999952515'

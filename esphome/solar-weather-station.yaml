@@ -1,0 +1,162 @@
+esphome:
+  name: solar-weather-station
+  friendly_name: solar-weather-station
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+debug:
+  update_interval: 5s
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+# api:
+#   encryption:
+#     key: "voE+R55yROmMighRD89guzZ/DLHZ/UIIDcZbFiSwPjI="
+
+ota:
+  - platform: esphome
+    password: "db4b6e539083d8dbc1ded097c7fad4c6"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Solar-Weather-Station"
+    password: "DfZCUWvbwMNG"
+
+captive_portal:
+
+web_server:
+  port: 80
+
+deep_sleep:
+  run_duration: 5s
+  sleep_duration: 5min
+  id: deep_sleep_1
+
+i2c:
+  sda: 1
+  scl: 2
+
+switch:
+  - platform: gpio
+    pin:
+      number: 5
+      mode: output
+    restore_mode: ALWAYS_ON
+    id: optocoupler
+
+sensor:
+  - platform: bme280_i2c
+    address: 0x76
+    temperature:
+      name: "Temperature"
+      id: bme280_temperature
+    humidity:
+      name: "Humidity"
+      id: bme280_humidity
+    pressure:
+      name: "Pressure"
+      id: bme280_pressure
+  - platform: sht3xd
+    temperature:
+      name: "Internal Temperature"
+      id: sht3x_internal_temperature
+    humidity:
+      name: "Internal Humidity"
+      id: sht3x_internal_humidity
+  - platform: bh1750
+    name: "Illuminance"
+    id: bh1750_illiminance
+  - platform: adc
+    pin: 4
+    name: "Battery voltage"
+    id: battery_voltage
+    accuracy_decimals: 2
+    attenuation: 12db
+    filters:
+      - multiply: 2.04
+    on_value: 
+      then:
+        - sensor.template.publish:
+            id: battery_level
+            state: !lambda 'return ((id(battery_voltage).state - 2.8) / (4.2 - 2.8)) * 100;'
+  - platform: template
+    name: "Battery level"
+    id: battery_level
+    unit_of_measurement: "%"
+    filters:
+      - round: 0
+  - platform: template
+    name: "CPU Frequency"
+    id: cpu_frequency
+    lambda: |-
+      return 240;
+  - platform: debug
+    free:
+      id: free_heap_sensor
+      on_value: 
+        then:
+          - sensor.template.publish:
+              id: ram_usage_kb
+              state: !lambda 'return (520000 - id(free_heap_sensor).state) / 1000;'
+          - sensor.template.publish:
+              id: ram_usage_percent
+              state: !lambda 'return (520000 - id(free_heap_sensor).state) / 520000 * 100;'
+  - platform: template
+    name: "RAM Usage KB"
+    id: ram_usage_kb
+    unit_of_measurement: "KB"
+  - platform: template
+    name: "RAM Usage %"
+    id: ram_usage_percent
+    unit_of_measurement: "%"
+  
+text_sensor:
+  - platform: template
+    name: "MCU"
+    id: mcu
+    lambda: |-
+      return {"ESP32-S3"};
+
+mqtt:
+  broker: !secret mqtt_host
+  birth_message:
+    topic: solar-weather-station/availability
+    payload: online
+  will_message:
+    topic: solar-weather-station/availability
+    payload: offline
+  on_message:
+    - topic: solar-weather-station/ota_mode
+      payload: 'ON'
+      then:
+        - deep_sleep.prevent: deep_sleep_1
+    - topic: solar-weather-station/sleep_mode
+      payload: 'ON'
+      then:
+        - deep_sleep.enter: deep_sleep_1
+  on_connect:
+    - wait_until: mqtt.connected
+    - mqtt.publish_json: 
+        topic: solar-weather-station/measurements
+        payload: |-
+          root["mcu"] = id(mcu).state;
+          root["cpuFrequency"] = id(cpu_frequency).state;
+          root["ramUsageKb"] = id(ram_usage_kb).state;
+          root["ramUsagePercent"] = id(ram_usage_percent).state;
+          root["temperature"] = id(bme280_temperature).state;
+          root["humidity"] = id(bme280_humidity).state;
+          root["pressure"] = id(bme280_pressure).state;
+          root["internalTemperature"] = id(sht3x_internal_temperature).state;
+          root["internalHumidity"] = id(sht3x_internal_humidity).state;
+          root["illuminance"] = id(bh1750_illiminance).state;
+          root["batteryVoltage"] = id(battery_voltage).state;
+          root["batteryLevel"] = id(battery_level).state;

@@ -8,7 +8,7 @@ vacuum_clean_living_room:
     data:
       command: spot_area
       params:
-        rooms: 4
+        rooms: 10
         cleanings: 1
 vacuum_clean_kitchen:
   alias: Vacuum Clean Kitchen
@@ -20,7 +20,7 @@ vacuum_clean_kitchen:
     data:
       command: spot_area
       params:
-        rooms: 1
+        rooms: 9
         cleanings: 1
   mode: single
 vacuum_clean_corridor:
@@ -33,7 +33,7 @@ vacuum_clean_corridor:
     data:
       command: spot_area
       params:
-        rooms: 0
+        rooms: 8
         cleanings: 1
 vacuum_clean_bathroom:
   alias: Vacuum Clean Bathroom
@@ -51,8 +51,7 @@ vacuum_clean_bathroom:
 microgreen_display:
   alias: Microgreen display
   sequence:
-  - service: open_epaper_link.drawcustom
-    target:
+  - target:
       entity_id:
       - open_epaper_link.00000284a2053b1a
     data:
@@ -67,11 +66,33 @@ microgreen_display:
         width: 1
         fill: black
       - type: text
-        value: Горошок
+        value: Капуста
         font: rbm.ttf
-        x: 30
+        x: 74
         y: 5
         color: red
+        anchor: mt
+      - type: text
+        value: 'Посаджено: 15.09'
+        font: rbm.ttf
+        size: 15
+        x: 74
+        y: 113
+        anchor: mt
+      - type: text
+        value: Соняшник
+        font: rbm.ttf
+        x: 222
+        y: 5
+        color: red
+        anchor: mt
+      - type: text
+        value: 'Посаджено: 15.09'
+        font: rbm.ttf
+        size: 15
+        x: 222
+        y: 113
+        anchor: mt
       - type: icon
         value: '{% if is_state(''light.microgreen_2_led'', ''on'') %} lightbulb {%
           else %} lightbulb-off {% endif %}'
@@ -108,18 +129,6 @@ microgreen_display:
         font: rbm.ttf
         x: 20
         y: 85
-      - type: text
-        value: 'Посаджено: 18.08'
-        font: rbm.ttf
-        size: 15
-        x: 5
-        y: 113
-      - type: text
-        value: Огірок-трава
-        font: rbm.ttf
-        x: 165
-        y: 5
-        color: red
       - type: icon
         value: '{% if is_state(''light.microgreen_1_led'', ''on'') %} lightbulb {%
           else %} lightbulb-off {% endif %}'
@@ -156,10 +165,5 @@ microgreen_display:
         font: rbm.ttf
         x: 170
         y: 85
-      - type: text
-        value: 'Посаджено: 18.08'
-        font: rbm.ttf
-        size: 15
-        x: 155
-        y: 113
+    action: open_epaper_link.drawcustom
   description: ''
