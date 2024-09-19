@@ -52,6 +52,9 @@ switch:
       mode: output
     restore_mode: ALWAYS_ON
     id: optocoupler
+  - platform: restart
+    name: "Restart"
+    id: solar_weather_station_restart
 
 sensor:
   - platform: bme280_i2c
@@ -75,19 +78,15 @@ sensor:
   - platform: bh1750
     name: "Illuminance"
     id: bh1750_illiminance
-  - platform: adc
-    pin: 4
-    name: "Battery voltage"
-    id: battery_voltage
-    accuracy_decimals: 2
-    attenuation: 12db
-    filters:
-      - multiply: 2.04
-    on_value: 
-      then:
-        - sensor.template.publish:
-            id: battery_level
-            state: !lambda 'return ((id(battery_voltage).state - 2.8) / (4.2 - 2.8)) * 100;'
+  - platform: ina226
+    bus_voltage:
+      name: "Battery voltage"
+      id: battery_voltage
+      on_value: 
+        then:
+          - sensor.template.publish:
+              id: battery_level
+              state: !lambda 'return ((id(battery_voltage).state - 2.8) / (4.2 - 2.8)) * 100;'
   - platform: template
     name: "Battery level"
     id: battery_level
