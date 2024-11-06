@@ -204,24 +204,6 @@ services:
       - /media/anton/UGREEN-1/media:/data/media1
     restart: unless-stopped
 
-  # Pi-hole
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    ports:
-      - '${LOCAL_IP_ADDRESS}:53:53/tcp'
-      - '${LOCAL_IP_ADDRESS}:53:53/udp'
-      - '5300:80/tcp'
-    env_file:
-      - .env
-    environment:
-      WEBPASSWORD: ${PIHOLE_WEBPASSWORD}
-      FTLCONF_BLOCK_ICLOUD_PR: 'false'
-    volumes:
-      - .docker/pihole/etc-pihole:/etc/pihole
-      - .docker/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
-    restart: unless-stopped
-
   # Homarr
   homarr:
     container_name: homarr
@@ -254,6 +236,15 @@ services:
     restart: unless-stopped
     depends_on:
       - home-assistant
+  
+  # iSponsorBlockTV
+  isponsorblocktv:
+    container_name: isponsorblocktv
+    image: ghcr.io/dmunozv04/isponsorblocktv
+    restart: unless-stopped
+    volumes:
+      - .docker/isponsorblocktv:/app/data
+    network_mode: host
 
   # Cloudflare Tunnel
   solar-weather-station-cloudflared:
@@ -287,6 +278,17 @@ services:
       - .env
     environment:
       - TUNNEL_TOKEN=${FIND_YOUR_WINE_CLOUDFLARE_TUNNEL_TOKEN}
+  
+  # Cloudflare Tunnel
+  hass-cloudflared:
+    container_name: hass-tunnel
+    image: cloudflare/cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    env_file:
+      - .env
+    environment:
+      - TUNNEL_TOKEN=${HASS_CLOUDFLARE_TUNNEL_TOKEN}
 
   # Frigate
   # frigate:
