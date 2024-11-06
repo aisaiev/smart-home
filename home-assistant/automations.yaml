@@ -236,7 +236,10 @@
         size: 20
         color: red
       - type: text
-        value: '{{states(''sensor.lun_misto_air_301_air_quality_index'')}}'
+        value: "{% if states(\"sensor.lun_misto_air_301_air_quality_index\") != \"unavailable\"
+          -%}\n  {{states(\"sensor.lun_misto_air_301_air_quality_index\")}}\n{%- else
+          -%}\n  {{states(\"sensor.lun_misto_air_37_air_quality_index\")}}\n{%- endif
+          %}"
         x: 225
         y: 37
         size: 15
@@ -437,4 +440,37 @@
         size: 70
         color: black
         anchor: mm
+  mode: single
+- id: '1726743163322'
+  alias: Nobody at home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - group.family_presence
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - device_id: 7ad849db86e2b95823aec327de734639
+    domain: vacuum
+    entity_id: 1242b1258d6d6d3c96b1a87d5b98dc7b
+    type: clean
+  mode: single
+- id: '1726743252979'
+  alias: Anybody arrive home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.anton_presence
+    - input_boolean.anastasiia_presence
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - device_id: 7ad849db86e2b95823aec327de734639
+    domain: vacuum
+    entity_id: 1242b1258d6d6d3c96b1a87d5b98dc7b
+    type: dock
   mode: single

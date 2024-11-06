@@ -66,28 +66,28 @@ microgreen_display:
         width: 1
         fill: black
       - type: text
-        value: Капуста
+        value: Буряк
         font: rbm.ttf
         x: 74
         y: 5
         color: red
         anchor: mt
       - type: text
-        value: 'Посаджено: 15.09'
+        value: 'Посаджено: 23.10'
         font: rbm.ttf
         size: 15
         x: 74
         y: 113
         anchor: mt
       - type: text
-        value: Соняшник
+        value: Редиска
         font: rbm.ttf
         x: 222
         y: 5
         color: red
         anchor: mt
       - type: text
-        value: 'Посаджено: 15.09'
+        value: 'Посаджено: 23.10'
         font: rbm.ttf
         size: 15
         x: 222
@@ -166,4 +166,14 @@ microgreen_display:
         x: 170
         y: 85
     action: open_epaper_link.drawcustom
+  description: ''
+tts:
+  alias: tts
+  sequence:
+  - action: chime_tts.say
+    data:
+      message: Доброго ранку, ми з України!
+    target:
+      entity_id:
+      - media_player.echo_dot_living_room
   description: ''

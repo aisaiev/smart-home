@@ -23,6 +23,7 @@ frigate
 /home-assistant/secrets.yaml
 /home-assistant/custom_components
 /home-assistant/www/community
+/home-assistant/www/chime_tts
 /home-assistant/www/open_epaper_link
 
 # Zigbee2MQTT

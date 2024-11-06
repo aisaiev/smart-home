@@ -1,0 +1,6 @@
+family_presence:
+  name: "Family Presence"
+  entities:
+    - input_boolean.anton_presence
+    - input_boolean.anastasiia_presence
+  all: false

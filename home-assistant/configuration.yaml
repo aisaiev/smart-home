@@ -12,6 +12,12 @@ scene: !include scenes.yaml
 template: !include template.yaml
 sensor: !include sensors.yaml
 emulated_hue: !include emulated_hue.yaml
+homekit: !include homekit.yaml
+group: !include groups.yaml
+
+homeassistant:
+  external_url: !secret hass_external_url
+  internal_url: !secret hass_internal_url
 
 http:
   use_x_forwarded_for: true

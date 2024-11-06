@@ -19,6 +19,6 @@ entities:
   switch.microgreen_2_fan:
     name: "Microgreen Fan 2"
     hidden: false
-  switch.eve_energy_20ebo8301:
+  switch.eve_energy_20ebo8301_switch:
     name: "Boiler"
     hidden: false
