@@ -47,7 +47,7 @@ services:
       - .env
     volumes:
       - .docker/duplicati/config:/config
-      - ./backups:/backups
+      - /media/anton/UGREEN-2/Backup/hass:/backup
       - .:/source
     ports:
       - 8200:8200
@@ -186,23 +186,6 @@ services:
       - .docker/transmission/config:/config
       - ./media/downloads:/downloads
       - /media/anton/EMMC/downloads:/emmc
-
-  # Plex
-  plex:
-    container_name: plex
-    image: lscr.io/linuxserver/plex:latest
-    network_mode: host
-    env_file:
-      - .env
-    environment:
-      VERSION: docker
-    volumes:
-      - .docker/plex/config:/config
-      - ./plex:/config/Library
-      - ./media/downloads:/downloads
-      - /media/anton/EMMC/downloads:/downloads2
-      - /media/anton/UGREEN-1/media:/data/media1
-    restart: unless-stopped
 
   # Homarr
   homarr:
