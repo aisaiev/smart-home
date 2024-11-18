@@ -25,56 +25,6 @@
     entity_id: cf7bcbd7414e37970a11ade0f3633d67
     domain: light
   mode: single
-- id: '1717655923777'
-  alias: Electricity not detected
-  description: ''
-  triggers:
-  - entity_id:
-    - binary_sensor.electricity_presence_2
-    from: 'on'
-    to: 'off'
-    trigger: state
-  conditions: []
-  actions:
-  - type: turn_off
-    device_id: eb6e5b4a4664fda5366635a02f6a179f
-    entity_id: fa44e5ac4a0df6c54e27397459eb45ee
-    domain: switch
-  - type: turn_off
-    device_id: cde3cbfdda2198258f8fa8a479cd3358
-    entity_id: f8c3eb16e1e78bc7b12b1619d8838365
-    domain: switch
-    enabled: false
-  - metadata: {}
-    data:
-      message: "Electricity not detected \U0001F50C"
-    action: notify.notify
-  mode: single
-- id: '1717656035531'
-  alias: Electricity detected
-  description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - binary_sensor.electricity_presence_2
-    from: 'off'
-    to: 'on'
-  conditions: []
-  actions:
-  - type: turn_on
-    device_id: eb6e5b4a4664fda5366635a02f6a179f
-    entity_id: fa44e5ac4a0df6c54e27397459eb45ee
-    domain: switch
-  - type: turn_on
-    device_id: cde3cbfdda2198258f8fa8a479cd3358
-    entity_id: f8c3eb16e1e78bc7b12b1619d8838365
-    domain: switch
-    enabled: false
-  - metadata: {}
-    data:
-      message: Electricity detected ⚡
-    action: notify.notify
-  mode: single
 - id: '1723288853366'
   alias: Microgreen display
   description: ''
