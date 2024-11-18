@@ -1,13 +1,15 @@
 - id: '1704194273528'
   alias: Create backup
   description: ''
-  trigger:
-  - platform: time
-    at: 00:00:00
-  condition: []
-  action:
-  - service: backup.create
-    data: {}
+  triggers:
+  - at: 00:00:00
+    trigger: time
+  conditions: []
+  actions:
+  - action: auto_backup.backup_full
+    data:
+      compressed: true
+      keep_days: 5
   mode: single
 - id: '1704200208287'
   alias: Sunset light
@@ -26,14 +28,14 @@
 - id: '1717655923777'
   alias: Electricity not detected
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - sensor.electricity_detector_relay_voltage
-    from:
-    to: unavailable
-  condition: []
-  action:
+  triggers:
+  - entity_id:
+    - binary_sensor.electricity_presence_2
+    from: 'on'
+    to: 'off'
+    trigger: state
+  conditions: []
+  actions:
   - type: turn_off
     device_id: eb6e5b4a4664fda5366635a02f6a179f
     entity_id: fa44e5ac4a0df6c54e27397459eb45ee
@@ -51,14 +53,14 @@
 - id: '1717656035531'
   alias: Electricity detected
   description: ''
-  trigger:
-  - platform: state
+  triggers:
+  - trigger: state
     entity_id:
-    - sensor.electricity_detector_relay_voltage
-    from: unavailable
-    to:
-  condition: []
-  action:
+    - binary_sensor.electricity_presence_2
+    from: 'off'
+    to: 'on'
+  conditions: []
+  actions:
   - type: turn_on
     device_id: eb6e5b4a4664fda5366635a02f6a179f
     entity_id: fa44e5ac4a0df6c54e27397459eb45ee
@@ -72,38 +74,6 @@
     data:
       message: Electricity detected ⚡
     action: notify.notify
-  mode: single
-- id: '1719304706918'
-  alias: Anton's Desktop Led Button Single click
-  description: ''
-  trigger:
-  - platform: device
-    domain: mqtt
-    device_id: c97304da42e5614a8f03c760bfd7e3bc
-    type: action
-    subtype: single
-  condition: []
-  action:
-  - type: toggle
-    device_id: ec88a148fbe20ff6e69eb7c013f96172
-    entity_id: 9ccec3dd1cc9a1322a4649ca7b57f53d
-    domain: light
-  mode: single
-- id: '1720421849927'
-  alias: Internet speed test
-  description: ''
-  trigger:
-  - platform: time_pattern
-    hours: /2
-  condition: []
-  action:
-  - service: homeassistant.update_entity
-    data: {}
-    target:
-      entity_id:
-      - sensor.speedtest_download
-      - automation.internet_speed_test
-      - sensor.speedtest_ping
   mode: single
 - id: '1723288853366'
   alias: Microgreen display

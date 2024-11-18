@@ -73,8 +73,8 @@ devices:
     friendly_name: Tuya Socket - Bambu Lab A1 Mini
   '0xa4c138d371771a16':
     friendly_name: Anton's Desktop Led
-  '0xa4c138ee392442c2':
-    friendly_name: Anton's Desktop Led Button
   '0xa4c1381c7534571b':
     friendly_name: Electricity detector relay
+  '0xa4c138a0e7c1a411':
+    friendly_name: Electricity presence
 availability: true
