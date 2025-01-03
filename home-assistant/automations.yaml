@@ -41,45 +41,58 @@
 - id: '1723294629565'
   alias: Spotify display
   description: ''
-  trigger: []
-  condition: []
-  action:
-  - service: spotifyplus.get_player_now_playing
-    data:
+  triggers:
+  - trigger: time_pattern
+    minutes: /1
+  - trigger: state
+    entity_id:
+    - media_player.spotifyplus_anton_isaiev
+    from: paused
+    to: playing
+  - trigger: state
+    entity_id:
+    - media_player.spotifyplus_anton_isaiev
+    from: 'off'
+    to: playing
+  conditions:
+  - condition: state
+    entity_id: media_player.spotifyplus_anton_isaiev
+    state: playing
+  actions:
+  - data:
       entity_id: media_player.spotifyplus_anton_isaiev
       additional_types: track,episode
     response_variable: track
-  - service: persistent_notification.create
-    data:
-      message: '{{ track.result.item.name }}'
-    enabled: true
-  - service: open_epaper_link.drawcustom
-    target:
+    action: spotifyplus.get_player_now_playing
+  - target:
       entity_id:
-      - open_epaper_link.0284a29d3b1b0284
+      - open_epaper_link.0000021ed5013b1d
     data:
       background: white
       rotate: 0
       payload:
       - type: dlimg
         url: '{{ track.result.item.album.images[0].url }}'
-        x: 0
-        y: 0
-        xsize: 148
-        ysize: 128
+        x: 5
+        y: 5
+        xsize: 120
+        ysize: 120
         rotate: 0
       - type: text
         value: '{{ track.result.item.name }}'
-        size: 15
-        max_width: 146
-        x: 150
+        size: 18
+        max_width: 166
+        x: 213
         y: 40
+        anchor: ma
       - type: text
         value: '{{ track.result.item.album.artists[0].name }}'
         color: red
-        size: 12
-        max_width: 146
-        x: 150
+        size: 14
+        x: 213
+        anchor: mb
+        y_padding: 20
+    action: open_epaper_link.drawcustom
   mode: single
 - id: '1723367150124'
   alias: Weather station display
@@ -229,31 +242,30 @@
 - id: '1724934618093'
   alias: Ecoflow Delta Pro display
   description: ''
-  trigger:
-  - platform: time_pattern
-    minutes: /10
-  - platform: state
-    entity_id:
+  triggers:
+  - minutes: /10
+    trigger: time_pattern
+  - entity_id:
     - sensor.bolek_status
     from: assume_offline
     to: assume_online
-  - platform: state
-    entity_id:
+    trigger: state
+  - entity_id:
     - switch.bolek_ac_enabled
     from: 'on'
     to: 'off'
-  - platform: state
-    entity_id:
+    trigger: state
+  - entity_id:
     - switch.bolek_ac_enabled
     from: 'off'
     to: 'on'
-  condition:
+    trigger: state
+  conditions:
   - condition: state
     entity_id: sensor.bolek_status
-    state: assume_online
-  action:
-  - service: open_epaper_link.drawcustom
-    target:
+    state: online
+  actions:
+  - target:
       entity_id:
       - open_epaper_link.0284a3393b140284
     data:
@@ -315,20 +327,20 @@
         y: 70
         anchor: rt
         size: 17
+    action: open_epaper_link.drawcustom
   mode: single
 - id: '1724943986455'
   alias: Ecoflow Delta Pro turned off
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - sensor.bolek_status
-    from: assume_online
-    to: assume_offline
-  condition: []
-  action:
-  - service: open_epaper_link.drawcustom
-    target:
+    from: online
+    to: offline
+    trigger: state
+  conditions: []
+  actions:
+  - target:
       entity_id:
       - open_epaper_link.0284a3393b140284
     data:
@@ -360,6 +372,7 @@
         size: 70
         color: black
         anchor: mm
+    action: open_epaper_link.drawcustom
   mode: single
 - id: '1726743163322'
   alias: Nobody at home
@@ -393,4 +406,119 @@
     domain: vacuum
     entity_id: 1242b1258d6d6d3c96b1a87d5b98dc7b
     type: dock
+  mode: single
+- id: '1732043188977'
+  alias: Macropad Button 1
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.macropad_button_1
+    from: 'off'
+    to: 'on'
+  conditions: []
+  actions:
+  - action: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.anastasiia_desktop_led
+  mode: single
+- id: '1732043474637'
+  alias: Macropad Button 2
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.macropad_button_2
+    from: 'off'
+    to: 'on'
+  conditions: []
+  actions:
+  - type: toggle
+    device_id: f4242b9122aad3a276e0e134b9f2a77d
+    entity_id: cf7bcbd7414e37970a11ade0f3633d67
+    domain: light
+  mode: single
+- id: '1732043526352'
+  alias: Macropad Button 3
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.macropad_button_3
+    from: 'off'
+    to: 'on'
+  conditions: []
+  actions:
+  - type: toggle
+    device_id: 66edc45b8dea066b081d650ad95decdf
+    entity_id: dd725caa2799d47bb6c5eeb566a98e8b
+    domain: light
+  mode: single
+- id: '1732104908301'
+  alias: Electricity not detected
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.electricity_presence_2
+    from: 'on'
+    to: 'off'
+  conditions: []
+  actions:
+  - type: turn_off
+    device_id: eb6e5b4a4664fda5366635a02f6a179f
+    entity_id: fa44e5ac4a0df6c54e27397459eb45ee
+    domain: switch
+  - type: turn_off
+    device_id: cde3cbfdda2198258f8fa8a479cd3358
+    entity_id: f8c3eb16e1e78bc7b12b1619d8838365
+    domain: switch
+  mode: single
+- id: '1732104955957'
+  alias: Electricity detected
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.electricity_presence_2
+    from: 'off'
+    to: 'on'
+  conditions: []
+  actions:
+  - type: turn_on
+    device_id: eb6e5b4a4664fda5366635a02f6a179f
+    entity_id: fa44e5ac4a0df6c54e27397459eb45ee
+    domain: switch
+  - type: turn_on
+    device_id: cde3cbfdda2198258f8fa8a479cd3358
+    entity_id: f8c3eb16e1e78bc7b12b1619d8838365
+    domain: switch
+  mode: single
+- id: '1732274654646'
+  alias: Spotify display idle
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - media_player.spotifyplus_anton_isaiev
+    from: playing
+    to: paused
+  conditions: []
+  actions:
+  - action: open_epaper_link.drawcustom
+    target:
+      entity_id: open_epaper_link.0000021ed5013b1d
+    data:
+      background: white
+      rotate: 0
+      payload:
+      - type: dlimg
+        url: https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Full_Logo_RGB_Black.png
+        x: 0
+        y: 25
+        xsize: 296
+        ysize: 80
+        rotate: 0
   mode: single
