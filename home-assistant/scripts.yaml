@@ -51,10 +51,7 @@ vacuum_clean_bathroom:
 microgreen_display:
   alias: Microgreen display
   sequence:
-  - target:
-      entity_id:
-      - open_epaper_link.00000284a2053b1a
-    data:
+  - data:
       background: white
       rotate: 0
       payload:
@@ -166,6 +163,8 @@ microgreen_display:
         x: 170
         y: 85
     action: open_epaper_link.drawcustom
+    target:
+      device_id: 84f1d8317d70c47f3958f6044d840eb0
   description: ''
 tts:
   alias: tts

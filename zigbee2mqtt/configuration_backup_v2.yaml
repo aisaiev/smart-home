@@ -1,7 +1,5 @@
-homeassistant:
-  enabled: true
-frontend:
-  enabled: true
+homeassistant: true
+frontend: true
 mqtt:
   base_topic: zigbee2mqtt
   server: mqtt://localhost
@@ -72,6 +70,5 @@ devices:
     friendly_name: Tuya Socket - Bambu Lab A1 Mini
   '0xa4c138d371771a16':
     friendly_name: Anastasiia's Desktop Led 2
-availability:
-  enabled: true
-version: 4
+availability: true
+version: 2

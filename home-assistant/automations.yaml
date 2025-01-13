@@ -1,29 +1,17 @@
-- id: '1704194273528'
-  alias: Create backup
-  description: ''
-  triggers:
-  - at: 00:00:00
-    trigger: time
-  conditions: []
-  actions:
-  - action: auto_backup.backup_full
-    data:
-      compressed: true
-      keep_days: 5
-  mode: single
 - id: '1704200208287'
   alias: Sunset light
   description: ''
-  trigger:
-  - platform: sun
-    event: sunset
+  triggers:
+  - event: sunset
     offset: -01:00:00
-  condition: []
-  action:
-  - type: turn_on
-    device_id: f4242b9122aad3a276e0e134b9f2a77d
-    entity_id: cf7bcbd7414e37970a11ade0f3633d67
-    domain: light
+    trigger: sun
+  conditions: []
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      device_id: c2fef9ae6ba0052278daa1224891c22c
   mode: single
 - id: '1723288853366'
   alias: Microgreen display
@@ -64,10 +52,7 @@
       additional_types: track,episode
     response_variable: track
     action: spotifyplus.get_player_now_playing
-  - target:
-      entity_id:
-      - open_epaper_link.0000021ed5013b1d
-    data:
+  - data:
       background: white
       rotate: 0
       payload:
@@ -93,21 +78,25 @@
         anchor: mb
         y_padding: 20
     action: open_epaper_link.drawcustom
+    target:
+      device_id: d4811c1a2058ce250c03c9218e29f5d5
   mode: single
 - id: '1723367150124'
   alias: Weather station display
   description: ''
-  trigger:
-  - platform: time_pattern
-    minutes: /30
-  condition: []
-  action:
-  - target:
-      entity_id:
-      - open_epaper_link.0284a29d3b1b0284
+  triggers:
+  - minutes: /30
+    trigger: time_pattern
+  conditions: []
+  actions:
+  - action: open_epaper_link.drawcustom
+    metadata: {}
     data:
-      background: white
       rotate: 0
+      dither: 2
+      ttl: 60
+      dry-run: false
+      background: white
       payload:
       - type: text
         value: Kyiv
@@ -207,7 +196,8 @@
         y: 118
         size: 10
         anchor: rt
-    action: open_epaper_link.drawcustom
+    target:
+      device_id: 59360e80188aa3fb1e2016982fa98dff
   mode: single
 - id: '1723999952515'
   alias: Microgreen state changed
@@ -265,10 +255,7 @@
     entity_id: sensor.bolek_status
     state: online
   actions:
-  - target:
-      entity_id:
-      - open_epaper_link.0284a3393b140284
-    data:
+  - data:
       background: white
       rotate: 0
       payload:
@@ -328,6 +315,8 @@
         anchor: rt
         size: 17
     action: open_epaper_link.drawcustom
+    target:
+      device_id: 610d6092d7fafb1c53e2ca5a57850223
   mode: single
 - id: '1724943986455'
   alias: Ecoflow Delta Pro turned off
@@ -340,10 +329,7 @@
     trigger: state
   conditions: []
   actions:
-  - target:
-      entity_id:
-      - open_epaper_link.0284a3393b140284
-    data:
+  - data:
       background: white
       rotate: 0
       payload:
@@ -373,6 +359,8 @@
         color: black
         anchor: mm
     action: open_epaper_link.drawcustom
+    target:
+      device_id: 610d6092d7fafb1c53e2ca5a57850223
   mode: single
 - id: '1726743163322'
   alias: Nobody at home
@@ -435,10 +423,11 @@
     to: 'on'
   conditions: []
   actions:
-  - type: toggle
-    device_id: f4242b9122aad3a276e0e134b9f2a77d
-    entity_id: cf7bcbd7414e37970a11ade0f3633d67
-    domain: light
+  - action: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      device_id: c2fef9ae6ba0052278daa1224891c22c
   mode: single
 - id: '1732043526352'
   alias: Macropad Button 3
@@ -508,8 +497,6 @@
   conditions: []
   actions:
   - action: open_epaper_link.drawcustom
-    target:
-      entity_id: open_epaper_link.0000021ed5013b1d
     data:
       background: white
       rotate: 0
@@ -521,4 +508,6 @@
         xsize: 296
         ysize: 80
         rotate: 0
+    target:
+      device_id: d4811c1a2058ce250c03c9218e29f5d5
   mode: single

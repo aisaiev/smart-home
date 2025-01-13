@@ -1,7 +1,5 @@
-homeassistant:
-  enabled: true
-frontend:
-  enabled: true
+homeassistant: true
+frontend: true
 mqtt:
   base_topic: zigbee2mqtt
   server: mqtt://localhost
@@ -36,6 +34,10 @@ advanced:
     - 130
     - 195
     - 225
+  homeassistant_legacy_entity_attributes: false
+  homeassistant_legacy_triggers: false
+  legacy_api: false
+  legacy_availability_payload: false
   log_syslog:
     app_name: Zigbee2MQTT
     eol: /n
@@ -48,7 +50,8 @@ advanced:
     type: '5424'
   transmit_power: 20
   last_seen: ISO_8601_local
-device_options: {}
+device_options:
+  legacy: false
 devices:
   '0xa4c13833f4c3b795':
     friendly_name: Tuya T&H - Server
@@ -72,6 +75,4 @@ devices:
     friendly_name: Tuya Socket - Bambu Lab A1 Mini
   '0xa4c138d371771a16':
     friendly_name: Anastasiia's Desktop Led 2
-availability:
-  enabled: true
-version: 4
+availability: true
