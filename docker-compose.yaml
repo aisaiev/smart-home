@@ -184,7 +184,8 @@ services:
       - 51413:51413/udp
     volumes:
       - .docker/transmission/config:/config
-      - ./media/downloads:/downloads
+      - /media/anton/Seagate/downloads:/downloads
+      - /home/anton/Downloads:/ssd
       - /media/anton/EMMC/downloads:/emmc
 
   # Homarr
