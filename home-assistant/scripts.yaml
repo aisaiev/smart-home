@@ -63,14 +63,14 @@ microgreen_display:
         width: 1
         fill: black
       - type: text
-        value: Буряк
+        value: Соняшник
         font: rbm.ttf
         x: 74
         y: 5
         color: red
         anchor: mt
       - type: text
-        value: 'Посаджено: 23.10'
+        value: 'Посаджено: 18.01'
         font: rbm.ttf
         size: 15
         x: 74
@@ -84,7 +84,7 @@ microgreen_display:
         color: red
         anchor: mt
       - type: text
-        value: 'Посаджено: 23.10'
+        value: 'Посаджено: 18.01'
         font: rbm.ttf
         size: 15
         x: 222

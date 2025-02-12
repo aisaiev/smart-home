@@ -440,10 +440,11 @@
     to: 'on'
   conditions: []
   actions:
-  - type: toggle
-    device_id: 66edc45b8dea066b081d650ad95decdf
-    entity_id: dd725caa2799d47bb6c5eeb566a98e8b
-    domain: light
+  - action: light.toggle
+    metadata: {}
+    data: {}
+    target:
+      device_id: 252be55c48d35042e8738d897fe9f44a
   mode: single
 - id: '1732104908301'
   alias: Electricity not detected

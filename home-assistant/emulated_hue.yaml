@@ -1,6 +1,12 @@
 listen_port: 8300
 expose_by_default: false
 entities:
+  light.jysk_christmas_light_led:
+    name: "Jysk Christmas Light"
+    hidden: false
+  light.jysk_arnold_led:
+    name: "Jysk Arnold"
+    hidden: false
   switch.flower_humidifier_switch:
     name: "Flower Humidifier"
     hidden: false
