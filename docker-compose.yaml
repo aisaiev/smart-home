@@ -229,6 +229,15 @@ services:
     volumes:
       - .docker/isponsorblocktv:/app/data
     network_mode: host
+  
+  # OpenSpeedTest
+  speedtest:
+    container_name: openspeedtest
+    image: openspeedtest/latest
+    ports:
+        - '3005:3000'
+        - '3006:3001'
+    restart: unless-stopped
 
   # Cloudflare Tunnel
   solar-weather-station-cloudflared:
