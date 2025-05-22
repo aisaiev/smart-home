@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "last_update": "2025-04-14T17:30:16.790717",
+  "last_update": "2025-05-21T02:30:18.704203",
   "tag_types": {
     "0": {
       "version": 4,
@@ -3489,7 +3489,7 @@
       "zlib_compression": "27"
     },
     "54": {
-      "version": 4,
+      "version": 5,
       "name": "M3 7.5\"",
       "width": 800,
       "height": 480,
@@ -3558,33 +3558,33 @@
           "location": [
             20,
             20,
-            "fonts/calibrib30"
-          ],
-          "wind": [
-            90,
-            83,
-            "fonts/calibrib30"
-          ],
-          "temp": [
-            20,
-            170,
-            "fonts/calibrib30"
+            "fonts/calibrib50"
           ],
           "icon": [
-            385,
-            0,
-            100,
+            580,
+            20,
+            200,
             2
           ],
-          "dir": [
+          "temp": [
             40,
-            50,
+            180,
+            "fonts/calibrib120"
+          ],
+          "wind": [
+            40,
+            370,
+            "fonts/calibrib40"
+          ],
+          "dir": [
+            250,
+            360,
             80
           ],
           "umbrella": [
-            325,
-            155,
-            78
+            400,
+            360,
+            80
           ]
         },
         "8": {
@@ -5622,6 +5622,330 @@
       "width": 720,
       "height": 256,
       "rotatebuffer": 1,
+      "bpp": 2,
+      "colortable": {
+        "white": [
+          255,
+          255,
+          255
+        ],
+        "black": [
+          0,
+          0,
+          0
+        ],
+        "red": [
+          255,
+          0,
+          0
+        ]
+      },
+      "shortlut": 0,
+      "options": [],
+      "contentids": [
+        22,
+        23,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        27
+      ],
+      "template": {
+        "1": {
+          "weekday": [
+            148,
+            -3,
+            "Signika-SB.ttf",
+            60
+          ],
+          "date": [
+            148,
+            65,
+            "Signika-SB.ttf",
+            48
+          ]
+        },
+        "2": {
+          "fonts": [
+            "Signika-SB.ttf",
+            150,
+            150,
+            150,
+            120,
+            100,
+            80
+          ],
+          "xy": [
+            148,
+            53
+          ]
+        },
+        "16": {
+          "location": [
+            5,
+            5,
+            "fonts/bahnschrift30"
+          ],
+          "title": [
+            247,
+            11,
+            "glasstown_nbp_tf"
+          ],
+          "cols": [
+            1,
+            125,
+            12,
+            "glasstown_nbp_tf"
+          ],
+          "bars": [
+            5,
+            111,
+            10
+          ]
+        },
+        "4": {
+          "location": [
+            5,
+            5,
+            "fonts/bahnschrift30"
+          ],
+          "wind": [
+            280,
+            5,
+            "fonts/bahnschrift30"
+          ],
+          "temp": [
+            5,
+            65,
+            "fonts/bahnschrift70"
+          ],
+          "icon": [
+            285,
+            20,
+            70,
+            2
+          ],
+          "dir": [
+            235,
+            -12,
+            40
+          ],
+          "umbrella": [
+            190,
+            -50,
+            25
+          ]
+        },
+        "8": {
+          "location": [
+            5,
+            12,
+            "t0_14b_tf"
+          ],
+          "column": [
+            5,
+            59
+          ],
+          "day": [
+            30,
+            18,
+            "fonts/twcondensed20",
+            41,
+            108
+          ],
+          "icon": [
+            30,
+            55,
+            30
+          ],
+          "wind": [
+            18,
+            26
+          ],
+          "line": [
+            20,
+            128
+          ]
+        },
+        "9": {
+          "title": [
+            2,
+            0,
+            "bahnschrift20.vlw",
+            25
+          ],
+          "items": 8,
+          "line": [
+            1,
+            25,
+            "REFSAN12.vlw"
+          ],
+          "desc": [
+            0,
+            5,
+            "",
+            1
+          ]
+        },
+        "10": {
+          "title": [
+            149,
+            5,
+            "fonts/bahnschrift20"
+          ],
+          "pos": [
+            149,
+            27
+          ]
+        },
+        "11": {
+          "mode": 0,
+          "days": 1,
+          "title": [
+            5,
+            2,
+            "fonts/bahnschrift20"
+          ],
+          "date": [
+            290,
+            2
+          ],
+          "items": 7,
+          "red": [
+            0,
+            21,
+            296,
+            14
+          ],
+          "line": [
+            5,
+            32,
+            15,
+            "t0_14b_tf",
+            50
+          ]
+        },
+        "21": [
+          {
+            "text": [
+              5,
+              5,
+              "OpenEpaperLink AP",
+              "bahnschrift20",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              5,
+              50,
+              "IP address:",
+              "t0_14b_tf",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              120,
+              50,
+              "{ap_ip}",
+              "t0_14b_tf",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              5,
+              70,
+              "Channel:",
+              "t0_14b_tf",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              120,
+              70,
+              "{ap_ch}",
+              "t0_14b_tf",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              5,
+              90,
+              "Tag count:",
+              "t0_14b_tf",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              120,
+              90,
+              "{ap_tagcount}",
+              "t0_14b_tf",
+              1,
+              0,
+              0
+            ]
+          }
+        ],
+        "27": {
+          "bars": [
+            9,
+            288,
+            90,
+            11
+          ],
+          "time": [
+            "tahoma9.vlw"
+          ],
+          "yaxis": [
+            "tahoma9.vlw",
+            0,
+            6
+          ],
+          "head": [
+            "calibrib30.vlw"
+          ]
+        }
+      },
+      "usetemplate": null,
+      "zlib_compression": "27"
+    },
+    "73": {
+      "version": 2,
+      "name": "M3 5.81\" V2 BWR",
+      "width": 720,
+      "height": 256,
+      "rotatebuffer": 0,
       "bpp": 2,
       "colortable": {
         "white": [
@@ -9588,6 +9912,418 @@
       "usetemplate": 1,
       "zlib_compression": "27"
     },
+    "107": {
+      "version": 2,
+      "name": "HS BWRY 7,5\"",
+      "width": 800,
+      "height": 480,
+      "rotatebuffer": 2,
+      "bpp": 2,
+      "colortable": {
+        "white": [
+          255,
+          255,
+          255
+        ],
+        "black": [
+          0,
+          0,
+          0
+        ],
+        "red": [
+          255,
+          0,
+          0
+        ],
+        "yellow": [
+          255,
+          255,
+          0
+        ]
+      },
+      "shortlut": 0,
+      "options": [
+        "button",
+        "led"
+      ],
+      "contentids": [
+        22,
+        23,
+        1,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        17,
+        18,
+        19,
+        20
+      ],
+      "template": {},
+      "usetemplate": 54,
+      "zlib_compression": "27"
+    },
+    "108": {
+      "version": 1,
+      "name": "HS BWRY 2,00\"",
+      "width": 152,
+      "height": 200,
+      "rotatebuffer": 1,
+      "bpp": 2,
+      "colortable": {
+        "white": [
+          255,
+          255,
+          255
+        ],
+        "black": [
+          0,
+          0,
+          0
+        ],
+        "red": [
+          255,
+          0,
+          0
+        ],
+        "yellow": [
+          255,
+          255,
+          0
+        ]
+      },
+      "shortlut": 0,
+      "options": [
+        "button"
+      ],
+      "contentids": [
+        22,
+        23,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        10,
+        14,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "template": {
+        "1": {
+          "weekday": [
+            76,
+            9,
+            "fonts/calibrib30"
+          ],
+          "month": [
+            76,
+            120,
+            "fonts/calibrib30"
+          ],
+          "day": [
+            76,
+            13,
+            "Signika-SB.ttf",
+            100
+          ]
+        },
+        "2": {
+          "fonts": [
+            "Signika-SB.ttf",
+            150,
+            110,
+            80,
+            60,
+            50,
+            40
+          ],
+          "xy": [
+            76,
+            65
+          ]
+        },
+        "4": {
+          "location": [
+            10,
+            145,
+            "t0_14b_tf"
+          ],
+          "wind": [
+            140,
+            10,
+            "fonts/bahnschrift30"
+          ],
+          "temp": [
+            10,
+            10,
+            "fonts/bahnschrift30"
+          ],
+          "icon": [
+            75,
+            26,
+            70,
+            1
+          ],
+          "dir": [
+            110,
+            -12,
+            40
+          ],
+          "umbrella": [
+            125,
+            110,
+            30
+          ]
+        },
+        "10": {
+          "title": [
+            76,
+            15,
+            "t0_14b_tf"
+          ],
+          "pos": [
+            76,
+            20
+          ]
+        },
+        "21": [
+          {
+            "text": [
+              2,
+              5,
+              "OpenEpaperLink",
+              "bahnschrift20",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              2,
+              25,
+              "Access Point",
+              "bahnschrift20",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              3,
+              65,
+              "IP address:",
+              "glasstown_nbp_tf",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              10,
+              80,
+              "{ap_ip}",
+              "t0_14b_tf",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              3,
+              95,
+              "Channel:",
+              "glasstown_nbp_tf",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              10,
+              110,
+              "{ap_ch}",
+              "t0_14b_tf",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              3,
+              125,
+              "Tag count:",
+              "glasstown_nbp_tf",
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "text": [
+              10,
+              140,
+              "{ap_tagcount}",
+              "t0_14b_tf",
+              1,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "usetemplate": null,
+      "zlib_compression": "27"
+    },
+    "109": {
+      "version": 1,
+      "name": "HS BWRY 3,5\"",
+      "width": 384,
+      "height": 184,
+      "rotatebuffer": 1,
+      "bpp": 2,
+      "colortable": {
+        "white": [
+          255,
+          255,
+          255
+        ],
+        "black": [
+          0,
+          0,
+          0
+        ],
+        "red": [
+          255,
+          0,
+          0
+        ],
+        "yellow": [
+          255,
+          255,
+          0
+        ]
+      },
+      "shortlut": 0,
+      "options": [
+        "led"
+      ],
+      "contentids": [
+        22,
+        23,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        13,
+        14,
+        17,
+        18,
+        19,
+        20,
+        27,
+        29
+      ],
+      "template": {
+        "27": {
+          "bars": [
+            12,
+            360,
+            125,
+            20
+          ],
+          "time": [
+            "calibrib16.vlw"
+          ],
+          "yaxis": [
+            "tahoma9.vlw",
+            1,
+            6
+          ],
+          "head": [
+            "calibrib30.vlw"
+          ]
+        }
+      },
+      "usetemplate": 51,
+      "zlib_compression": "27"
+    },
+    "110": {
+      "version": 1,
+      "name": "HS BWRY 2,9\"",
+      "width": 296,
+      "height": 128,
+      "rotatebuffer": 1,
+      "bpp": 2,
+      "colortable": {
+        "white": [
+          255,
+          255,
+          255
+        ],
+        "black": [
+          0,
+          0,
+          0
+        ],
+        "red": [
+          255,
+          0,
+          0
+        ],
+        "yellow": [
+          255,
+          255,
+          0
+        ]
+      },
+      "shortlut": 2,
+      "options": [],
+      "contentids": [
+        22,
+        23,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        27
+      ],
+      "template": {},
+      "usetemplate": 1,
+      "zlib_compression": "27"
+    },
     "128": {
       "version": 1,
       "name": "Chroma 7.4\"",
@@ -9636,7 +10372,7 @@
       "zlib_compression": null
     },
     "129": {
-      "version": 1,
+      "version": 2,
       "name": "Chroma Aeon 74 7.4\"",
       "width": 800,
       "height": 480,
@@ -9679,7 +10415,7 @@
       ],
       "template": {},
       "usetemplate": 54,
-      "zlib_compression": null
+      "zlib_compression": "3"
     },
     "130": {
       "version": 2,

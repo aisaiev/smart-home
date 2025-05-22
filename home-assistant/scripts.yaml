@@ -63,28 +63,28 @@ microgreen_display:
         width: 1
         fill: black
       - type: text
-        value: Соняшник
+        value: Редиска
         font: rbm.ttf
         x: 74
         y: 5
         color: red
         anchor: mt
       - type: text
-        value: 'Посаджено: 18.01'
+        value: 'Посаджено: 20.05'
         font: rbm.ttf
         size: 15
         x: 74
         y: 113
         anchor: mt
       - type: text
-        value: Редиска
+        value: Соняшник
         font: rbm.ttf
         x: 222
         y: 5
         color: red
         anchor: mt
       - type: text
-        value: 'Посаджено: 18.01'
+        value: 'Посаджено: 20.05'
         font: rbm.ttf
         size: 15
         x: 222
