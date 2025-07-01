@@ -51,9 +51,49 @@
     unique_id: "solar_weather_station_battery_voltage"
     device_class: "voltage"
     state_topic: "solar-weather-station/measurements"
-    suggested_display_precision: 2
+    suggested_display_precision: 3
     unit_of_measurement: "V"
     value_template: "{{ value_json.batteryVoltage }}"
+  
+  - name: "Solar Weather Station - Battery current"
+    unique_id: "solar_weather_station_battery_current"
+    device_class: "current"
+    state_topic: "solar-weather-station/measurements"
+    suggested_display_precision: 3
+    unit_of_measurement: "A"
+    value_template: "{{ value_json.batteryCurrent }}"
+
+  - name: "Solar Weather Station - Battery power"
+    unique_id: "solar_weather_station_battery_power"
+    device_class: "power"
+    state_topic: "solar-weather-station/measurements"
+    suggested_display_precision: 3
+    unit_of_measurement: "W"
+    value_template: "{{ value_json.batteryPower }}"
+
+  - name: "Solar Weather Station - Solar panel voltage"
+    unique_id: "solar_weather_station_solar_panel_voltage"
+    device_class: "voltage"
+    state_topic: "solar-weather-station/measurements"
+    suggested_display_precision: 3
+    unit_of_measurement: "V"
+    value_template: "{{ value_json.solarPanelVoltage }}"
+  
+  - name: "Solar Weather Station - Solar panel current"
+    unique_id: "solar_weather_station__solar_panel_current"
+    device_class: "current"
+    state_topic: "solar-weather-station/measurements"
+    suggested_display_precision: 3
+    unit_of_measurement: "A"
+    value_template: "{{ value_json.solarPanelCurrent }}"
+
+  - name: "Solar Weather Station - Solar panel power"
+    unique_id: "solar_weather_station_solar_panel_power"
+    device_class: "power"
+    state_topic: "solar-weather-station/measurements"
+    suggested_display_precision: 3
+    unit_of_measurement: "W"
+    value_template: "{{ value_json.solarPanelPower }}"
 
   - name: "Solar Weather Station - Battery level"
     unique_id: "solar_weather_station_battery_level"

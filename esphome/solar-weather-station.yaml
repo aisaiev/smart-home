@@ -1,6 +1,30 @@
+switch:
+  - platform: gpio
+    id: mosfet
+    pin:
+      number: 5
+      inverted: True
+      mode:
+        output: True
+    restore_mode: ALWAYS_ON
+  - platform: restart
+    name: "Restart"
+    id: solar_weather_station_restart
+
 esphome:
   name: solar-weather-station
   friendly_name: solar-weather-station
+  on_boot:
+    priority: -100
+    then:
+      - switch.turn_on: mosfet
+      - delay: 1s
+      - text_sensor.template.publish:
+          id: mcu
+          state: "ESP32-S3"
+      - sensor.template.publish:
+          id: cpu_frequency
+          state: 160
 
 esp32:
   board: esp32-s3-devkitc-1
@@ -37,28 +61,19 @@ web_server:
   port: 80
 
 deep_sleep:
-  run_duration: 5s
+  run_duration: 15s
   sleep_duration: 5min
   id: deep_sleep_1
 
 i2c:
   sda: 1
   scl: 2
-
-switch:
-  - platform: gpio
-    pin:
-      number: 5
-      mode: output
-    restore_mode: ALWAYS_ON
-    id: optocoupler
-  - platform: restart
-    name: "Restart"
-    id: solar_weather_station_restart
+  scan: False
 
 sensor:
   - platform: bme280_i2c
     address: 0x76
+    update_interval: 5s
     temperature:
       name: "Temperature"
       id: bme280_temperature
@@ -69,6 +84,7 @@ sensor:
       name: "Pressure"
       id: bme280_pressure
   - platform: sht3xd
+    update_interval: 5s
     temperature:
       name: "Internal Temperature"
       id: sht3x_internal_temperature
@@ -76,9 +92,39 @@ sensor:
       name: "Internal Humidity"
       id: sht3x_internal_humidity
   - platform: bh1750
+    update_interval: 5s
     name: "Illuminance"
     id: bh1750_illiminance
   - platform: ina226
+    address: 0x40
+    shunt_resistance: 0.002
+    update_interval: 5s
+    current:
+      name: "Solar Panel Current"
+      id: solar_panel_current
+      filters:
+        - lambda: |-
+            if (x < 0) {
+              return 0;
+            } else {
+              return x;
+            }
+    power:
+      name: "Solar Panel Power"
+      id: solar_panel_power
+    bus_voltage:
+      name: "Solar Panel voltage"
+      id: solar_panel_voltage
+  - platform: ina226
+    address: 0x41
+    shunt_resistance: 0.002
+    update_interval: 5s
+    current:
+      name: "Battery Current"
+      id: battery_current
+    power:
+      name: "Battery Power"
+      id: battery_power
     bus_voltage:
       name: "Battery voltage"
       id: battery_voltage
@@ -88,7 +134,7 @@ sensor:
               id: battery_level
               state: !lambda 'return ((id(battery_voltage).state - 2.8) / (4.2 - 2.8)) * 100;'
   - platform: template
-    name: "Battery level"
+    name: "Battery Level"
     id: battery_level
     unit_of_measurement: "%"
     filters:
@@ -96,8 +142,6 @@ sensor:
   - platform: template
     name: "CPU Frequency"
     id: cpu_frequency
-    lambda: |-
-      return 240;
   - platform: debug
     free:
       id: free_heap_sensor
@@ -122,8 +166,6 @@ text_sensor:
   - platform: template
     name: "MCU"
     id: mcu
-    lambda: |-
-      return {"ESP32-S3"};
 
 mqtt:
   broker: !secret mqtt_host
@@ -144,6 +186,7 @@ mqtt:
         - deep_sleep.enter: deep_sleep_1
   on_connect:
     - wait_until: mqtt.connected
+    - delay: 5s
     - mqtt.publish_json: 
         topic: solar-weather-station/measurements
         payload: |-
@@ -158,4 +201,9 @@ mqtt:
           root["internalHumidity"] = id(sht3x_internal_humidity).state;
           root["illuminance"] = id(bh1750_illiminance).state;
           root["batteryVoltage"] = id(battery_voltage).state;
+          root["batteryCurrent"] = id(battery_current).state;
+          root["batteryPower"] = id(battery_power).state;
           root["batteryLevel"] = id(battery_level).state;
+          root["solarPanelVoltage"] = id(solar_panel_voltage).state;
+          root["solarPanelCurrent"] = id(solar_panel_current).state;
+          root["solarPanelPower"] = id(solar_panel_power).state;
