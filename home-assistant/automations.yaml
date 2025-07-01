@@ -158,10 +158,10 @@
         size: 20
         color: red
       - type: text
-        value: "{% if states(\"sensor.lun_misto_air_301_air_quality_index\") != \"unavailable\"
-          -%}\n  {{states(\"sensor.lun_misto_air_301_air_quality_index\")}}\n{%- else
-          -%}\n  {{states(\"sensor.lun_misto_air_37_air_quality_index\")}}\n{%- endif
-          %}"
+        value: "{% set sensor1 = states(\"sensor.lun_misto_air_301_air_quality_index\")
+          %} {% set sensor2 = states(\"sensor.lun_misto_air_37_air_quality_index\")
+          %} {% if sensor1 != \"unavailable\" %}\n  {{ sensor1 }}\n{% elif sensor2
+          != \"unavailable\" %}\n  {{ sensor2 }}\n{% else %}\n  N/A\n{% endif %}"
         x: 225
         y: 37
         size: 15
@@ -511,4 +511,20 @@
         rotate: 0
     target:
       device_id: d4811c1a2058ce250c03c9218e29f5d5
+  mode: single
+- id: '1749385319116'
+  alias: Weather station camera make snapshot
+  description: ''
+  triggers:
+  - trigger: time_pattern
+    seconds: /5
+  conditions: []
+  actions:
+  - action: camera.snapshot
+    metadata: {}
+    data:
+      filename: /config/www/weather-station-camera/photo_{{ now().strftime('%Y%m%d_%H%M%S')
+        }}.jpg
+    target:
+      entity_id: camera.weather_station_camera_camera
   mode: single
