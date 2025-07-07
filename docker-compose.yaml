@@ -238,25 +238,11 @@ services:
         - '3005:3000'
         - '3006:3001'
     restart: unless-stopped
-  
-  # Pi-hole
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    ports:
-      - '53:53/tcp'
-      - '53:53/udp'
-      - '8081:80/tcp'
-    env_file:
-      - .env
-    volumes:
-      - .docker/pihole/etc-pihole:/etc/pihole
-    restart: unless-stopped
 
   # Cloudflare Tunnel
   solar-weather-station-cloudflared:
     container_name: solar-weather-station-tunnel
-    image: cloudflare/cloudflared
+    image: cloudflare/cloudflared:latest
     restart: unless-stopped
     command: tunnel run
     env_file:
@@ -265,20 +251,9 @@ services:
       - TUNNEL_TOKEN=${SOLAR_WEATHER_STATION_CLOUDFLARE_TUNNEL_TOKEN}
 
   # Cloudflare Tunnel
-  maxar-map-cloudflared:
-    container_name: maxar-map-tunnel
-    image: cloudflare/cloudflared
-    restart: unless-stopped
-    command: tunnel run
-    env_file:
-      - .env
-    environment:
-      - TUNNEL_TOKEN=${MAXAR_MAP_CLOUDFLARE_TUNNEL_TOKEN}
-
-  # Cloudflare Tunnel
   find-your-wine-cloudflared:
     container_name: find-your-wine-tunnel
-    image: cloudflare/cloudflared
+    image: cloudflare/cloudflared:latest
     restart: unless-stopped
     command: tunnel run
     env_file:
@@ -289,7 +264,7 @@ services:
   # Cloudflare Tunnel
   hass-cloudflared:
     container_name: hass-tunnel
-    image: cloudflare/cloudflared
+    image: cloudflare/cloudflared:latest
     restart: unless-stopped
     command: tunnel run
     env_file:
@@ -300,14 +275,13 @@ services:
   # Blog Tunnel
   blog-cloudflared:
     container_name: blog-tunnel
-    image: cloudflare/cloudflared
+    image: cloudflare/cloudflared:latest
     restart: unless-stopped
     command: tunnel run
     env_file:
       - .env
     environment:
       - TUNNEL_TOKEN=${BLOG_CLOUDFLARE_TUNNEL_TOKEN}
-
 
   # Frigate
   # frigate:
