@@ -47,7 +47,7 @@ services:
       - .env
     volumes:
       - .docker/duplicati/config:/config
-      - /media/anton/UGREEN-2/Backup/hass:/backup
+      - /media/anton/Seagate/backup/hass:/backup
       - .:/source
     ports:
       - 8200:8200
@@ -184,9 +184,7 @@ services:
       - 51413:51413/udp
     volumes:
       - .docker/transmission/config:/config
-      - /media/anton/Seagate/downloads:/downloads
-      - /home/anton/Downloads:/ssd
-      - /media/anton/EMMC/downloads:/emmc
+      - /mnt/media:/downloads
 
   # Homarr
   homarr:

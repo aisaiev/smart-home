@@ -2,6 +2,7 @@ homeassistant:
   enabled: true
 frontend:
   enabled: true
+  package: zigbee2mqtt-windfront
 mqtt:
   base_topic: zigbee2mqtt
   server: mqtt://localhost
